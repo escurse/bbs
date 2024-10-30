@@ -23,13 +23,14 @@ public class BoardController {
     @RequestMapping(value ="/list", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getList(@RequestParam(value = "id", required = false) String id) {
         BoardEntity board = this.boardSerivce.getBoard(id);
-        if (board == null) {
-            System.out.println("그런 게시판 없음");
-        } else {
-            System.out.println("그런 게시판 있음: " +board.getText());
-        }
+//        if (board == null) {
+//            System.out.println("그런 게시판 없음");
+//        } else {
+//            System.out.println("그런 게시판 있음: " +board.getText());
+//        }
 
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("board", board);
         modelAndView.setViewName("board/list");
         return modelAndView;
     }
