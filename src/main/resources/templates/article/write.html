@@ -19,15 +19,13 @@
     <link rel="stylesheet" href="/board/assets/styles/list.css" type="text/css">
 </head>
 <body th:if="${board != null}">
-<main id="main">
-    <h1 class="title" th:text="${board.getText()}"></h1>
-    <table class="article-table">
-
-    </table>
+<form method="post" id="main">
+    <h1 class="title" th:text="${'글 쓰기 - ' + board.getText()}"></h1>
     <div class="button-container">
         <div class="spring"></div>
-        <a class="button write" th:href="@{'/article/wirte' (boardId=${board.getId()})}">글 쓰기</a>
+        <a class="button cancel" th:href="@{'/board/list' (id=${board.getId()})}">취소</a>
+        <button class="button write" type="submit">글 쓰기</button>
     </div>
-</main>
+</form>
 </body>
 </html>
