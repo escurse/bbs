@@ -3,8 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.escass.advancedbbs.mappers.BoardMapper">
-    <insert id="selectBoardById">
-        INSERT INTO `advanced_bbs`.`boards`(id, text)
-        VALUES (#{id}, #{text})
-    </insert>
+    <select id="selectBoardById"
+            resultType="com.escass.advancedbbs.entities.BoardEntity">
+        SELECT `id`   AS `id`,
+               `text` AS `text`
+        FROM `advanced_bbs`.`boards`
+        WHERE `id` = #{id}
+        LIMIT 1
+    </select>
 </mapper>
