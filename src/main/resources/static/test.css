@@ -1,0 +1,32 @@
+a {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  color: red;
+}
+a[href] {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: row;
+  text-decoration: line-through;
+}
+a > b {
+  color: blue;
+}
+a > b.banana {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  justify-content: center;
+  font-size: 2rem;
+}
+a > b:hover {
+  background-color: black;
+}
+
+/*# sourceMappingURL=test.css.map */

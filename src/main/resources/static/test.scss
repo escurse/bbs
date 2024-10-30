@@ -1,0 +1,30 @@
+@mixin flex($d, $a, $j, $g: 0) {
+  align-items: $a;
+  display: flex;
+  flex-direction: $d;
+  gap: $g;
+  justify-content: $j;
+}
+
+a {
+  @include flex(row, center, center, 1rem);
+  color: red;
+
+  &[href] {
+    @include flex(column, flex-start, row, 0.5rem);
+    text-decoration:  line-through;
+  }
+
+  > b {
+    color: blue;
+
+    &.banana {
+      @include flex(row, flex-start, center, 0.25rem);
+      font-size: 2rem;
+    }
+
+    &:hover {
+      background-color: black;
+    }
+  }
+}
