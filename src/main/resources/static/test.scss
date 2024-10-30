@@ -12,7 +12,7 @@ a {
 
   &[href] {
     @include flex(column, flex-start, row, 0.5rem);
-    text-decoration:  line-through;
+    text-decoration: line-through;
   }
 
   > b {
