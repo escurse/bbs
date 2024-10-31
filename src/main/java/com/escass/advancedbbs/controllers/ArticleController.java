@@ -36,7 +36,9 @@ public class ArticleController {
         boolean result = this.articleService.write(article);
         JSONObject response = new JSONObject();
         response.put("result", result);
+        if (result) {
+            response.put("index", article.getIndex());
+        }
         return response.toString();
     }
-
 }

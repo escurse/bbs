@@ -22,6 +22,10 @@ public class ArticleService {
             return false;
         }
         article.setCreatedAt(LocalDateTime.now());
-        return this.articleMapper.insertArticle(article) > 0;
+        article.setView(0);
+        article.setUpdatedAt(null);
+        article.setDeletedAt(null);
+        int affectedRows = this.articleMapper.insertArticle(article);
+        return affectedRows > 0;
     }
 }

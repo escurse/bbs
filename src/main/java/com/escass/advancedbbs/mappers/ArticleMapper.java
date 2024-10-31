@@ -6,4 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ArticleMapper {
     int insertArticle(ArticleEntity article);
+    int updateArticle(ArticleEntity article);
+    int deleteArticle(ArticleEntity article);
 }
