@@ -2,17 +2,15 @@ package com.escass.advancedbbs.services;
 
 import com.escass.advancedbbs.entities.ArticleEntity;
 import com.escass.advancedbbs.mappers.ArticleMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
+@RequiredArgsConstructor
 public class ArticleService {
     private final ArticleMapper articleMapper;
-
-    @Autowired
-    public ArticleService(ArticleMapper articleMapper) {
-        this.articleMapper = articleMapper;
-    }
 
     public boolean write(ArticleEntity article) {
         if (article == null ||
@@ -23,6 +21,7 @@ public class ArticleService {
             article.getContent() == null || article.getContent().isEmpty() || article.getContent().length() > 16_777_215) {
             return false;
         }
-        return false;
+        article.setCreatedAt(LocalDateTime.now());
+        return this.articleMapper.insertArticle(article) > 0;
     }
 }

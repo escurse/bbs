@@ -402,7 +402,7 @@ ClassicEditor.create($main['content'], editorConfig).then((editor) => {
         if ($main['password'].value === '') {
             return;
         }
-        if ($main['passwordCheck'].value !== $main['passwordCheck'].value) {
+        if ($main['password'].value !== $main['passwordCheck'].value) {
             alert('입력하신 비밀번호가 서로 일치하지 않습니다.');
             $main['passwordCheck'].focus();
             return;

@@ -4,7 +4,8 @@ import com.escass.advancedbbs.entities.ArticleEntity;
 import com.escass.advancedbbs.entities.BoardEntity;
 import com.escass.advancedbbs.services.ArticleService;
 import com.escass.advancedbbs.services.BoardSerivce;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value = "/article")
+@RequiredArgsConstructor
 public class ArticleController {
+    private final ArticleService articleService;
     private final BoardSerivce boardSerivce;
-
-    @Autowired
-    public ArticleController(BoardSerivce boardSerivce) {
-        this.boardSerivce = boardSerivce;
-    }
 
     @RequestMapping(value = "/write", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getWrite(@RequestParam(value = "boardId", required = false) String boardId) {
@@ -34,8 +32,11 @@ public class ArticleController {
 
     @RequestMapping(value = "/write", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public boolean postWrite(ArticleEntity article) {
-        return true;
+    public String postWrite(ArticleEntity article) {
+        boolean result = this.articleService.write(article);
+        JSONObject response = new JSONObject();
+        response.put("result", result);
+        return response.toString();
     }
 
 }
