@@ -391,6 +391,25 @@ const $main = document.getElementById('main');
 ClassicEditor.create($main['content'], editorConfig).then((editor) => {
     $main.onsubmit = (e) => {
         e.preventDefault();
-        console.log(editor.getData());
+        // console.log($main['title'].value)    글 제목
+        // console.log(editor.getData());       글 내용
+        if ($main['title'].value === '') {
+            return;
+        }
+        const xhr = new XMLHttpRequest();
+        const formData = new FormData();
+        formData.append('title', $main['title'].value);
+        formData.append('content', editor.getData());
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== XMLHttpRequest.DONE) {
+                return;
+            }
+            if (xhr.status < 200 || xhr.status >= 300) {
+                alert('오류 발생');
+                return;
+            }
+        };
+        xhr.open('POST', location.href);
+        xhr.send(formData);
     }
 });
