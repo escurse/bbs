@@ -21,6 +21,12 @@
 <body th:if="${board != null}">
 <form method="post" id="main">
     <h1 class="title" th:text="${'글 쓰기 - ' + board.getText()}"></h1>
+    <label class="label">
+        <input required name="title" class="input" maxlength="100" placeholder="제목을 입력해 주세요.">
+    </label>
+    <label class="label">
+        <textarea name="content" class="content"></textarea>
+    </label>
     <div class="button-container">
         <div class="spring"></div>
         <a class="button cancel" th:href="@{'/board/list' (id=${board.getId()})}">취소</a>
