@@ -16,7 +16,7 @@ public class ArticleService {
         if (index < 1) {
             return null;
         }
-        return null;
+        return this.articleMapper.selectArticleByIndex(index);
     }
 
     public boolean write(ArticleEntity article) {
