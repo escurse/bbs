@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping(value="/article")
+@RequestMapping(value = "/article")
 public class ArticleController {
     private final BoardSerivce boardSerivce;
 
@@ -20,8 +20,8 @@ public class ArticleController {
         this.boardSerivce = boardSerivce;
     }
 
-    @RequestMapping(value="/write", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getWrite(@RequestParam(value= "boardId", required = false) String boardId) {
+    @RequestMapping(value = "/write", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getWrite(@RequestParam(value = "boardId", required = false) String boardId) {
         BoardEntity board = this.boardSerivce.getBoard(boardId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("board", board);
@@ -29,8 +29,9 @@ public class ArticleController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
-    public String postWrite() {
+    @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
+    public String postWrite(@RequestParam(value = "nickname") String nickname, @RequestParam(value = "password") String password,
+                            @RequestParam(value = "title") String title, @RequestParam(value = "content") String content) {
         return "article/write";
     }
 

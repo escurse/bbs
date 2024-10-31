@@ -9,18 +9,24 @@
   font-size: 1.5rem;
   font-weight: 500;
 }
-#main > .label > .title {
+#main .input {
   width: 100%;
   background-color: #ffffff;
   border: 0.0625rem solid #e0e0e0;
   box-sizing: border-box;
   padding: 0.625rem 0.625rem;
 }
-#main > .label > .title:hover {
+#main .input:hover {
   border-color: rgb(198.5, 198.5, 198.5);
 }
-#main > .label > .title:focus {
+#main .input:focus {
   border-color: #387aeb;
+}
+#main > .writer-container {
+  display: grid;
+  gap: 0.375rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
 }
 #main > .button-container {
   align-items: stretch;

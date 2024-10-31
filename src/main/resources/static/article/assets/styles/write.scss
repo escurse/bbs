@@ -12,7 +12,7 @@
     font-weight: 500;
   }
 
-  > .label > .title {
+  .input {
     $border-color: #e0e0e0;
     width: 100%;
     background-color: #ffffff;
@@ -27,6 +27,13 @@
     &:focus {
       border-color: #387aeb;
     }
+  }
+
+  > .writer-container {
+    display: grid;
+    gap: 0.375rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
   }
 
   > .button-container {

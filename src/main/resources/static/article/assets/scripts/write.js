@@ -396,8 +396,21 @@ ClassicEditor.create($main['content'], editorConfig).then((editor) => {
         if ($main['title'].value === '') {
             return;
         }
+        if ($main['nickname'].value === '') {
+            return;
+        }
+        if ($main['password'].value === '') {
+            return;
+        }
+        if ($main['passwordCheck'].value !== $main['passwordCheck'].value) {
+            alert('입력하신 비밀번호가 서로 일치하지 않습니다.');
+            $main['passwordCheck'].focus();
+            return;
+        }
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
+        formData.append('nickname', $main['nickname'].value);
+        formData.append('password', $main['password'].value);
         formData.append('title', $main['title'].value);
         formData.append('content', editor.getData());
         xhr.onreadystatechange = () => {

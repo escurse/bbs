@@ -27,8 +27,19 @@
 <body th:if="${board != null}">
 <form method="post" id="main">
     <h1 class="title" th:text="${'글 쓰기 - ' + board.getText()}"></h1>
+    <div class="writer-container">
+        <label class="label">
+            <input required class="input nickname" maxlength="10" minlength="2" name="nickname" placeholder="닉네임" type="text">
+        </label>
+        <label class="label">
+            <input required class="input password" maxlength="50" minlength="4" name="password" placeholder="비밀번호" type="password">
+        </label>
+        <label class="label">
+            <input required class="input password-check" maxlength="50" minlength="4" name="passwordCheck" placeholder="비밀번호 확인" type="password">
+        </label>
+    </div>
     <label class="label">
-        <input required name="title" class="title" maxlength="100" placeholder="제목을 입력해 주세요.">
+        <input required name="title" class="input title" maxlength="100" placeholder="제목을 입력해 주세요.">
     </label>
     <label class="label">
         <textarea name="content" class="content"></textarea>
