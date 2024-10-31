@@ -16,6 +16,17 @@ body {
   justify-content: flex-start;
 }
 
+button, input, select, textarea {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  outline: none;
+  padding-block: 0;
+  padding-inline: 0;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font: inherit;
   margin-block: 0;
