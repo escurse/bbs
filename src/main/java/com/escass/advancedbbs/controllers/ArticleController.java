@@ -29,7 +29,7 @@ public class ArticleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/write", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
     public String postWrite(@RequestParam(value = "nickname") String nickname, @RequestParam(value = "password") String password,
                             @RequestParam(value = "title") String title, @RequestParam(value = "content") String content) {
         return "article/write";
