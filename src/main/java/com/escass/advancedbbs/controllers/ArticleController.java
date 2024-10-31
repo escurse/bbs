@@ -2,6 +2,7 @@ package com.escass.advancedbbs.controllers;
 
 import com.escass.advancedbbs.entities.ArticleEntity;
 import com.escass.advancedbbs.entities.BoardEntity;
+import com.escass.advancedbbs.services.ArticleService;
 import com.escass.advancedbbs.services.BoardSerivce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -33,8 +34,8 @@ public class ArticleController {
 
     @RequestMapping(value = "/write", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postWrite(ArticleEntity articleEntity) {
-        return "article/write";
+    public boolean postWrite(ArticleEntity article) {
+        return true;
     }
 
 }
