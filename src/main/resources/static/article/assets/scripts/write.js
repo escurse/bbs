@@ -41,12 +41,10 @@ const {
     LinkImage,
     List,
     ListProperties,
-    Markdown,
     MediaEmbed,
     Mention,
     PageBreak,
     Paragraph,
-    PasteFromMarkdownExperimental,
     PasteFromOffice,
     RemoveFormat,
     SelectAll,
@@ -171,12 +169,10 @@ const editorConfig = {
         LinkImage,
         List,
         ListProperties,
-        Markdown,
         MediaEmbed,
         Mention,
         PageBreak,
         Paragraph,
-        PasteFromMarkdownExperimental,
         PasteFromOffice,
         RemoveFormat,
         SelectAll,
@@ -392,4 +388,9 @@ const editorConfig = {
 
 const $main = document.getElementById('main');
 
-ClassicEditor.create($main['content'], editorConfig);
+ClassicEditor.create($main['content'], editorConfig).then((editor) => {
+    $main.onsubmit = (e) => {
+        e.preventDefault();
+        console.log(editor.getData());
+    }
+});

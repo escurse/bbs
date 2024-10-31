@@ -12,6 +12,23 @@
     font-weight: 500;
   }
 
+  > .label > .title {
+    $border-color: #e0e0e0;
+    width: 100%;
+    background-color: #ffffff;
+    border: 0.0625rem solid $border-color;
+    box-sizing: border-box;
+    padding: 0.625rem 0.625rem;
+
+    &:hover {
+      border-color: darken($border-color, 10%);
+    }
+
+    &:focus {
+      border-color: #387aeb;
+    }
+  }
+
   > .button-container {
     align-items: stretch;
     display: flex;

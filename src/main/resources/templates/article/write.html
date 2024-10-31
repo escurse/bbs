@@ -21,13 +21,14 @@
     <link rel="stylesheet" href="/assets/libraries/ckeditor/ckeditor5-content.css" type="text/css">
     <link rel="stylesheet" href="/assets/libraries/ckeditor/ckeditor5-editor.css" type="text/css">
     <script src="/assets/libraries/ckeditor/ckeditor5.umd.js" type="text/javascript"></script>
+    <script src="/assets/libraries/ckeditor/ko.umd.js" type="text/javascript"></script>
     <script defer src="/article/assets/scripts/write.js" type="text/javascript"></script>
 </head>
 <body th:if="${board != null}">
 <form method="post" id="main">
     <h1 class="title" th:text="${'글 쓰기 - ' + board.getText()}"></h1>
     <label class="label">
-        <input required name="title" class="input" maxlength="100" placeholder="제목을 입력해 주세요.">
+        <input required name="title" class="title" maxlength="100" placeholder="제목을 입력해 주세요.">
     </label>
     <label class="label">
         <textarea name="content" class="content"></textarea>
