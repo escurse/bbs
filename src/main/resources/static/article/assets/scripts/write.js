@@ -409,6 +409,7 @@ ClassicEditor.create($main['content'], editorConfig).then((editor) => {
                 return;
             }
             const response = JSON.parse(xhr.responseText);
+            location.href += '';
             // TODO ...
         };
         xhr.open('POST', location.href);
