@@ -390,4 +390,6 @@ const editorConfig = {
     }
 };
 
-ClassicEditor.create(document.querySelector('#editor'), editorConfig);
+const $main = document.getElementById('main');
+
+ClassicEditor.create($main['content'], editorConfig);
