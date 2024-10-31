@@ -21,6 +21,13 @@ public class ArticleController {
     private final ArticleService articleService;
     private final BoardSerivce boardSerivce;
 
+    @RequestMapping(value="/read", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRead(@RequestParam(value="index", required = false, defaultValue = "0") int index) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("article/read");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/write", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getWrite(@RequestParam(value = "boardId", required = false) String boardId) {
         BoardEntity board = this.boardSerivce.getBoard(boardId);

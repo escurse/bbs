@@ -13,4 +13,20 @@
         VALUES (#{boardId}, #{nickname}, #{password}, #{title}, #{content}, #{view}, #{createdAt}, #{updatedAt},
                 #{deletedAt})
     </insert>
+    <select id="selectArticleByIndex"
+            resultType="com.escass.advancedbbs.entities.ArticleEntity">
+        SELECT `index`      AS `index`,
+               `board_id`   AS `boardId`,
+               `nickname`   AS `nickname`,
+               `password`   AS `password`,
+               `title`      AS `title`,
+               `content`    AS `content`,
+               `view`       AS `view`,
+               `created_at` AS `createdAt`,
+               `updated_at` AS `updatedAt`,
+               `deleted_at` AS `deletedAt`
+        FROM `advanced_bbs`.`articles`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
 </mapper>

@@ -12,6 +12,13 @@ import java.time.LocalDateTime;
 public class ArticleService {
     private final ArticleMapper articleMapper;
 
+    public ArticleEntity getArticle(int index) {
+        if (index < 1) {
+            return null;
+        }
+        return null;
+    }
+
     public boolean write(ArticleEntity article) {
         if (article == null ||
             article.getBoardId() == null ||
