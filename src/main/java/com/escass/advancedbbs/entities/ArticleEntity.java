@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = {"index"})
 public class ArticleEntity {
     private int index;
-    private String board_id;
+    private String boardId;
     private String nickname;
     private String password;
     private String title;

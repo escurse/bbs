@@ -1,5 +1,6 @@
 package com.escass.advancedbbs.controllers;
 
+import com.escass.advancedbbs.entities.ArticleEntity;
 import com.escass.advancedbbs.entities.BoardEntity;
 import com.escass.advancedbbs.services.BoardSerivce;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -29,9 +31,9 @@ public class ArticleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/write", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
-    public String postWrite(@RequestParam(value = "nickname") String nickname, @RequestParam(value = "password") String password,
-                            @RequestParam(value = "title") String title, @RequestParam(value = "content") String content) {
+    @RequestMapping(value = "/write", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postWrite(ArticleEntity articleEntity) {
         return "article/write";
     }
 
