@@ -28,4 +28,10 @@ public class ArticleController {
         modelAndView.setViewName("article/write");
         return modelAndView;
     }
+
+    @RequestMapping(value="/", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
+    public String postWrite() {
+        return "article/write";
+    }
+
 }

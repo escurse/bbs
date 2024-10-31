@@ -405,9 +405,11 @@ ClassicEditor.create($main['content'], editorConfig).then((editor) => {
                 return;
             }
             if (xhr.status < 200 || xhr.status >= 300) {
-                alert('오류 발생');
+                alert('게시글을 작성하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
                 return;
             }
+            const response = JSON.parse(xhr.responseText);
+            // TODO ...
         };
         xhr.open('POST', location.href);
         xhr.send(formData);
