@@ -1,7 +1,9 @@
 package com.escass.advancedbbs.controllers;
 
 import com.escass.advancedbbs.entities.BoardEntity;
+import com.escass.advancedbbs.services.ArticleService;
 import com.escass.advancedbbs.services.BoardSerivce;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -12,13 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value ="/board")
+@RequiredArgsConstructor
 public class BoardController {
     private final BoardSerivce boardSerivce;
-
-    @Autowired
-    public BoardController(BoardSerivce boardSerivce) {
-        this.boardSerivce = boardSerivce;
-    }
 
     @RequestMapping(value ="/list", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getList(@RequestParam(value = "id", required = false) String id) {
