@@ -57,5 +57,25 @@
 #main > .button-container > .button.back:active {
   background-color: rgb(134.5, 134.5, 134.5);
 }
+#main > .button-container > .button.modify {
+  background-color: #2196f3;
+  color: #ffffff;
+}
+#main > .button-container > .button.modify:hover {
+  background-color: rgb(12.8461538462, 138.0961538462, 237.6538461538);
+}
+#main > .button-container > .button.modify:active {
+  background-color: rgb(11.5384615385, 124.0384615385, 213.4615384615);
+}
+#main > .button-container > .button.delete {
+  background-color: #ef5350;
+  color: #ffffff;
+}
+#main > .button-container > .button.delete:hover {
+  background-color: rgb(236.8638743455, 60.0366492147, 56.6361256545);
+}
+#main > .button-container > .button.delete:active {
+  background-color: rgb(234.7277486911, 37.0732984293, 33.2722513089);
+}
 
 /*# sourceMappingURL=read.css.map */

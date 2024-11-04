@@ -71,6 +71,30 @@
           background-color: darken($background_color, 10%);
         }
       }
+
+      &.modify {
+        $background_color: #2196f3;
+        background-color: $background_color;
+        color: #ffffff;
+        &:hover {
+          background-color: darken($background_color, 5%);
+        }
+        &:active {
+          background-color: darken($background_color, 10%);
+        }
+      }
+
+      &.delete {
+        $background_color: #ef5350;
+        background-color: $background_color;
+        color: #ffffff;
+        &:hover {
+          background-color: darken($background_color, 5%);
+        }
+        &:active {
+          background-color: darken($background_color, 10%);
+        }
+      }
     }
   }
 }
