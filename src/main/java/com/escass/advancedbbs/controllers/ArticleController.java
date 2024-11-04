@@ -22,7 +22,25 @@ import org.springframework.web.servlet.ModelAndView;
 public class ArticleController {
     private final ArticleService articleService;
     private final BoardSerivce boardSerivce;
-    private final ArticleMapper articleMapper;
+
+    @RequestMapping(value = "/modify", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getModify(@RequestParam(value = "index", required = false, defaultValue = "0") int index,
+                                  @RequestParam(value = "password", required = false) String password) {
+        ModelAndView modelAndView = new ModelAndView();
+        ArticleEntity article = this.articleService.getArticle(index);
+        if (article != null) {
+            if (!article.getPassword().equals(password)) {
+                article = null;
+            }
+        }
+        if (article != null) {
+            BoardEntity board = this.boardSerivce.getBoard(article.getBoardId());
+            modelAndView.addObject("article", article);
+            modelAndView.addObject("board", board);
+        }
+        modelAndView.setViewName("article/modify");
+        return modelAndView;
+    }
 
     @RequestMapping(value = "/read", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getRead(@RequestParam(value = "index", required = false, defaultValue = "0") int index) {
@@ -67,12 +85,5 @@ public class ArticleController {
             response.put("index", article.getIndex());
         }
         return response.toString();
-    }
-
-    @RequestMapping(value = "/modify", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getModify() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("article/modify");
-        return modelAndView;
     }
 }
