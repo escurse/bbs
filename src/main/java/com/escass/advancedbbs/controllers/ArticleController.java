@@ -2,6 +2,7 @@ package com.escass.advancedbbs.controllers;
 
 import com.escass.advancedbbs.entities.ArticleEntity;
 import com.escass.advancedbbs.entities.BoardEntity;
+import com.escass.advancedbbs.mappers.ArticleMapper;
 import com.escass.advancedbbs.services.ArticleService;
 import com.escass.advancedbbs.services.BoardSerivce;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ArticleController {
     private final ArticleService articleService;
     private final BoardSerivce boardSerivce;
+    private final ArticleMapper articleMapper;
 
     @RequestMapping(value="/read", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getRead(@RequestParam(value="index", required = false, defaultValue = "0") int index) {
@@ -27,6 +29,7 @@ public class ArticleController {
         ArticleEntity article = this.articleService.getArticle(index);
         modelAndView.addObject("article", article);
         if (article != null) {
+            this.articleService.increaseArticleView(article);
             BoardEntity board = this.boardSerivce.getBoard(article.getBoardId());
             modelAndView.addObject("board", board);
         }

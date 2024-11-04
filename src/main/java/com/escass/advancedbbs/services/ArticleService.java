@@ -19,6 +19,14 @@ public class ArticleService {
         return this.articleMapper.selectArticleByIndex(index);
     }
 
+    public boolean increaseArticleView(ArticleEntity article) {
+        if (article == null) {
+            return false;
+        }
+        article.setView(article.getView() + 1);
+        return this.articleMapper.updateArticle(article) > 0;
+    }
+
     public boolean write(ArticleEntity article) {
         if (article == null ||
             article.getBoardId() == null ||
