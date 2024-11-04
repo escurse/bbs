@@ -17,7 +17,7 @@
     </script>
     <link rel="stylesheet" href="/assets/styles/common.css" type="text/css">
     <link rel="stylesheet" href="/article/assets/styles/read.css" type="text/css">
-    <script defer src="/article/assets/scripts/read.js"></script>
+    <script defer src="/article/assets/scripts/read.js" type="text/javascript"></script>
 </head>
 <body th:if="${article != null && board != null}">
 <div id="cover"></div>
@@ -29,7 +29,7 @@
         <input required class="field" name="password" maxlength="50" minlength="4" type="password">
     </label>
     <div class="button-container">
-        <button class="--obj-button -light" type="button">취소</button>
+        <button class="--obj-button -light" name="cancel" type="button">취소</button>
         <button class="--obj-button -blue" type="submit">확인</button>
     </div>
 </form>
@@ -58,8 +58,8 @@
     <div class="button-container">
         <a class="button back --obj-button -light" th:href="@{'/board/list' (id=${board.getId()})}">목록</a>
         <span class="spring"></span>
-        <button class="button modify --obj-button -blue">수정</button>
-        <button class="button delete --obj-button -red">삭제</button>
+        <button class="button modify --obj-button -blue" name="modify">수정</button>
+        <button class="button delete --obj-button -red" name="delete">삭제</button>
     </div>
 </main>
 </body>
