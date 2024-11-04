@@ -46,8 +46,8 @@
     </label>
     <div class="button-container">
         <div class="spring"></div>
-        <a class="button cancel" th:href="@{'/board/list' (id=${board.getId()})}">취소</a>
-        <button class="button write" type="submit">글 쓰기</button>
+        <a class="button cancel --obj-button -light" th:href="@{'/board/list' (id=${board.getId()})}">취소</a>
+        <button class="button write --obj-button -blue" type="submit">글 쓰기</button>
     </div>
 </form>
 </body>

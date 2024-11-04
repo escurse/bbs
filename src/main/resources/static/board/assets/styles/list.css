@@ -64,20 +64,5 @@
 #main > .button-container > .spring {
   flex-grow: 1;
 }
-#main > .button-container > .button {
-  border-radius: 0.25rem;
-  padding: 0.5rem 0.75rem;
-  text-decoration: none;
-}
-#main > .button-container > .button.write {
-  background-color: #42a5f5;
-  color: #ffffff;
-}
-#main > .button-container > .button.write:hover {
-  background-color: rgb(41.7814070352, 153.4673366834, 243.7185929648);
-}
-#main > .button-container > .button.write:active {
-  background-color: rgb(17.5628140704, 141.9346733668, 242.4371859296);
-}
 
 /*# sourceMappingURL=list.css.map */

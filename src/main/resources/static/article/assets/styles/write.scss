@@ -46,39 +46,5 @@
     > .spring {
       flex-grow: 1;
     }
-
-    > .button {
-      border-radius: 0.25rem;
-      padding: 0.5rem 0.75rem;
-      text-decoration: none;
-
-      &.write {
-        $background_color: #42a5f5;
-        background-color: $background_color;
-        color: #ffffff;
-
-        &:hover {
-          background-color: darken($background_color, 5%);
-        }
-
-        &:active {
-          background-color: darken($background_color, 10%);
-        }
-      }
-
-      &.cancel {
-        $background_color: #a0a0a0;
-        background-color: $background_color;
-        color: #ffffff;
-
-        &:hover {
-          background-color: darken($background_color, 5%);
-        }
-
-        &:active {
-          background-color: darken($background_color, 10%);
-        }
-      }
-    }
   }
 }

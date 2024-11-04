@@ -32,3 +32,35 @@ h1, h2, h3, h4, h5, h6 {
   margin-block: 0;
   margin-inline: 0;
 }
+
+@mixin applyButtonColorScheme($bg, $c: #ffffff) {
+  background-color: $bg;
+  color: $c;
+  &:hover {
+    background-color: darken($bg, 5%);
+  }
+  &:active {
+    background-color: darken($bg, 10%);
+  }
+}
+
+.--obj-button {
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+
+  &.-light {
+    @include applyButtonColorScheme(#a0a0a0);
+  }
+
+  &.-blue {
+    @include applyButtonColorScheme(#2196f3);
+  }
+
+  &.-red {
+    @include applyButtonColorScheme(#ef5350);
+  }
+}
