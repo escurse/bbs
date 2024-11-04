@@ -44,7 +44,7 @@ public class ArticleController {
                              @RequestParam(value = "password", required = false) String password) {
         DeleteArticleResult result = this.articleService.deleteArticle(index, password);
         JSONObject response = new JSONObject();
-        response.put("result", result);
+        response.put("result", result.name().toLowerCase());
         return response.toString();
     }
 

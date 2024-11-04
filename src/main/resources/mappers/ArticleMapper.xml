@@ -13,6 +13,7 @@
         VALUES (#{boardId}, #{nickname}, #{password}, #{title}, #{content}, #{view}, #{createdAt}, #{updatedAt},
                 #{deletedAt})
     </insert>
+
     <select id="selectArticleByIndex"
             resultType="com.escass.advancedbbs.entities.ArticleEntity">
         SELECT `index`      AS `index`,
