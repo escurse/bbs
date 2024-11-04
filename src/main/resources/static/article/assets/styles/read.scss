@@ -41,6 +41,38 @@
       }
     }
   }
+
+  > .button-container {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+    justify-content: flex-start;
+
+    > .spring {
+      flex-grow: 1;
+    }
+
+    > .button {
+      border-radius: 0.25rem;
+      cursor: pointer;
+      padding: 0.5rem 0.75rem;
+      text-decoration: none;
+      user-select: none;
+
+      &.back {
+        $background_color: #a0a0a0;
+        background-color: $background_color;
+        color: #ffffff;
+        &:hover {
+          background-color: darken($background_color, 5%);
+        }
+        &:active {
+          background-color: darken($background_color, 10%);
+        }
+      }
+    }
+  }
 }
 
 

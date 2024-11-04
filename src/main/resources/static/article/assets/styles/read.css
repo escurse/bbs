@@ -30,5 +30,32 @@
 #main > .table > tbody > tr > td.title {
   width: 100%;
 }
+#main > .button-container {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  justify-content: flex-start;
+}
+#main > .button-container > .spring {
+  flex-grow: 1;
+}
+#main > .button-container > .button {
+  border-radius: 0.25rem;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  user-select: none;
+}
+#main > .button-container > .button.back {
+  background-color: #a0a0a0;
+  color: #ffffff;
+}
+#main > .button-container > .button.back:hover {
+  background-color: rgb(147.25, 147.25, 147.25);
+}
+#main > .button-container > .button.back:active {
+  background-color: rgb(134.5, 134.5, 134.5);
+}
 
 /*# sourceMappingURL=read.css.map */
