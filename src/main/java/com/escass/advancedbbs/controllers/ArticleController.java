@@ -26,6 +26,10 @@ public class ArticleController {
         ModelAndView modelAndView = new ModelAndView();
         ArticleEntity article = this.articleService.getArticle(index);
         modelAndView.addObject("article", article);
+        if (article != null) {
+            BoardEntity board = this.boardSerivce.getBoard(article.getBoardId());
+            modelAndView.addObject("board", board);
+        }
         modelAndView.setViewName("article/read");
         return modelAndView;
     }
