@@ -5,6 +5,12 @@ const $main = document.getElementById('main');
 {
     const $modifyButton = $main.querySelector('button[name="modify"]');
     const $deleteButton = $main.querySelector('button[name="delete"]');
+    $modifyButton.onclick = () => {
+        $cover.classList.add('--visible');
+        $passwordDialog['mode'].value = 'modify';
+        $passwordDialog['password'].value = '';
+        $passwordDialog.classList.add('--visible');
+    };
     $deleteButton.onclick = () => {
         $cover.classList.add('--visible');
         $passwordDialog['mode'].value = 'delete';
@@ -60,18 +66,11 @@ const $main = document.getElementById('main');
             xhr.send(formData);
         }
         if ($passwordDialog['mode'].value === 'modify') {
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState !== XMLHttpRequest.DONE) {
-                    return;
-                }
-                if (xhr.status < 200 || xhr.status >= 300) {
-                    alert('오류 발생');
-                    return;
-                }
-            }
-            xhr.open('GET', location.href);
-            xhr.send();
+            const url = new URL(location.href);
+            url.pathname = '/article/modify';
+            url.searchParams.set('index', $passwordDialog['index'].value);
+            url.searchParams.set('password', $passwordDialog['password'].value);
+            location.href = url.toString();
         }
     }
 }
