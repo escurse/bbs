@@ -33,25 +33,11 @@
         </thead>
         <tbody>
         <tr>
-            <td>3</td>
-            <td>세번째 게시글</td>
-            <td>삼삼이</td>
-            <td>333</td>
-            <td>2024-10-30 13:33</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>두번째 게시글</td>
-            <td>둘둘이</td>
-            <td>2,222</td>
-            <td>2024-10-30 12:22</td>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>첫번째 게시글</td>
-            <td>일</td>
-            <td>1</td>
-            <td>2024-10-30 12:11</td>
+            <td th:text="${article.getIndex()}"></td>
+            <td th:text="${article.getTitle()}"></td>
+            <td th:text="${article.getNickname()}"></td>
+            <td th:text="${article.getView()}"></td>
+            <td th:text="${article.getCreatedAt()}"></td>
         </tr>
         </tbody>
     </table>

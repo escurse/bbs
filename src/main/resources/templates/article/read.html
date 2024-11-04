@@ -17,8 +17,22 @@
     </script>
     <link rel="stylesheet" href="/assets/styles/common.css" type="text/css">
     <link rel="stylesheet" href="/article/assets/styles/read.css" type="text/css">
+    <script defer src="/article/assets/scripts/read.js"></script>
 </head>
 <body th:if="${article != null && board != null}">
+<div id="cover"></div>
+<form id="passwordDialog">
+    <span class="message">비밀번호를 입력해 주세요.</span>
+    <input name="index" type="hidden" th:value="${article.getIndex()}">
+    <input name="mode" type="hidden">
+    <label class="label">
+        <input required class="field" name="password" maxlength="50" minlength="4" type="password">
+    </label>
+    <div class="button-container">
+        <button class="--obj-button -light" type="button">취소</button>
+        <button class="--obj-button -blue" type="submit">확인</button>
+    </div>
+</form>
 <main id="main">
     <h1 class="title" th:text="${board.getText()}"></h1>
     <table class="table">
