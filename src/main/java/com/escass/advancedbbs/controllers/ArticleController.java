@@ -24,8 +24,8 @@ public class ArticleController {
     private final BoardSerivce boardSerivce;
     private final ArticleMapper articleMapper;
 
-    @RequestMapping(value="/read", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getRead(@RequestParam(value="index", required = false, defaultValue = "0") int index) {
+    @RequestMapping(value = "/read", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRead(@RequestParam(value = "index", required = false, defaultValue = "0") int index) {
         ModelAndView modelAndView = new ModelAndView();
         ArticleEntity article = this.articleService.getArticle(index);
         modelAndView.addObject("article", article);
@@ -38,7 +38,7 @@ public class ArticleController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/read", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/read", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String deleteRead(@RequestParam(value = "index", required = false, defaultValue = "0") int index,
                              @RequestParam(value = "password", required = false) String password) {
@@ -67,5 +67,12 @@ public class ArticleController {
             response.put("index", article.getIndex());
         }
         return response.toString();
+    }
+
+    @RequestMapping(value = "/modify", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getModify() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("article/modify");
+        return modelAndView;
     }
 }
