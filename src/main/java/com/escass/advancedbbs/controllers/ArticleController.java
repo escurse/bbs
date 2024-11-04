@@ -3,6 +3,7 @@ package com.escass.advancedbbs.controllers;
 import com.escass.advancedbbs.entities.ArticleEntity;
 import com.escass.advancedbbs.entities.BoardEntity;
 import com.escass.advancedbbs.mappers.ArticleMapper;
+import com.escass.advancedbbs.results.article.DeleteArticleResult;
 import com.escass.advancedbbs.services.ArticleService;
 import com.escass.advancedbbs.services.BoardSerivce;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,10 @@ public class ArticleController {
     @ResponseBody
     public String deleteRead(@RequestParam(value = "index", required = false, defaultValue = "0") int index,
                              @RequestParam(value = "password", required = false) String password) {
-
+        DeleteArticleResult result = this.articleService.deleteArticle(index, password);
+        JSONObject response = new JSONObject();
+        response.put("result", result);
+        return response.toString();
     }
 
     @RequestMapping(value = "/write", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)

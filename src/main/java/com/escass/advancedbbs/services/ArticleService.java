@@ -28,7 +28,9 @@ public class ArticleService {
             return DeleteArticleResult.FAILURE_PASSWORD;
         }
         article.setDeletedAt(LocalDateTime.now());
-        return DeleteArticleResult.SUCCESS;
+        return this.articleMapper.updateArticle(article) > 0
+                ? DeleteArticleResult.SUCCESS
+                : DeleteArticleResult.FAILURE;
     }
 
     public ArticleEntity getArticle(int index) {
