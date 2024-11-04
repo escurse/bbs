@@ -2,6 +2,7 @@ package com.escass.advancedbbs.services;
 
 import com.escass.advancedbbs.entities.ArticleEntity;
 import com.escass.advancedbbs.mappers.ArticleMapper;
+import com.escass.advancedbbs.results.article.DeleteArticleResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,24 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ArticleService {
     private final ArticleMapper articleMapper;
+
+    public DeleteArticleResult deleteArticle(int index, String password) {
+        if (index < 1 || password == null || password.length() < 4 || password.length() > 50) {
+            return DeleteArticleResult.FAILURE;
+        }
+        ArticleEntity article = this.articleMapper.selectArticleByIndex(index);
+        if (article == null) {
+            return DeleteArticleResult.FAILURE;
+        }
+        if (article.getDeletedAt() != null) {
+            return DeleteArticleResult.FAILURE;
+        }
+        if (!article.getPassword().equals(password)) {
+            return DeleteArticleResult.FAILURE_PASSWORD;
+        }
+        article.setDeletedAt(LocalDateTime.now());
+        return DeleteArticleResult.SUCCESS;
+    }
 
     public ArticleEntity getArticle(int index) {
         if (index < 1) {

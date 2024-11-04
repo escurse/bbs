@@ -37,6 +37,13 @@ public class ArticleController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/read", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String deleteRead(@RequestParam(value = "index", required = false, defaultValue = "0") int index,
+                             @RequestParam(value = "password", required = false) String password) {
+
+    }
+
     @RequestMapping(value = "/write", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getWrite(@RequestParam(value = "boardId", required = false) String boardId) {
         BoardEntity board = this.boardSerivce.getBoard(boardId);
