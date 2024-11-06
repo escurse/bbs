@@ -93,8 +93,10 @@ const $main = document.getElementById('main');
             alert('내용을 입력해 주세요.');
             return;
         }
+        const url = new URL(location.href);
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
+        formData.append('articleIndex', url.searchParams.get('index'));
         formData.append('nickname', $form['nickname']);
         formData.append('password', $form['password']);
         formData.append('content', $form['content']);
