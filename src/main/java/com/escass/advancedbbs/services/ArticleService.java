@@ -43,6 +43,13 @@ public class ArticleService {
         return this.articleMapper.selectArticleByIndex(index);
     }
 
+    public ImageEntity getImage(int index) {
+        if (index < 1) {
+            return null;
+        }
+        return this.imageMapper.selectImageByIndex(index);
+    }
+
     public boolean increaseArticleView(ArticleEntity article) {
         if (article == null) {
             return false;
@@ -88,13 +95,6 @@ public class ArticleService {
         }
         image.setCreatedAt(LocalDateTime.now());
         return this.imageMapper.insertImage(image) > 0;
-    }
-
-    public ImageEntity downloadImage(int index) {
-        if (index < 1) {
-            return null;
-        }
-        return this.imageMapper.selectImageByIndex(index);
     }
 
     public boolean write(ArticleEntity article) {

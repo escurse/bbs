@@ -26,6 +26,13 @@ public class ArticleController {
     private final ArticleService articleService;
     private final BoardSerivce boardSerivce;
 
+    @RequestMapping(value="/image", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getImage() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("article/image");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/image", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public String postImage(@RequestParam (value="upload")MultipartFile file) throws IOException {
