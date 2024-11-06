@@ -114,5 +114,87 @@
   }
 }
 
+#main > .comment-container {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: flex-start;
 
+  .form {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    gap: 0.375rem;
+    justify-content: flex-start;
+
+    .label {
+      $border_color: #e0e0e0;
+      $color: #a0a0a0;
+      align-items: stretch;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      justify-content: flex-start;
+
+      &:hover {
+        > .text {
+          color: darken($color, 10%);
+        }
+
+        > .field {
+          border-color: darken($border_color, 10%);
+        }
+      }
+
+      &:focus-within {
+        > .text {
+          color: #387aeb;
+        }
+
+        > .field {
+          border-color: #387aeb;
+        }
+      }
+
+      > .text {
+        color: $color;
+        font-size: 0.7rem;
+      }
+
+      > .field {
+        background-color: #ffffff;
+        border: 0.0625rem solid $border_color;
+        border-radius: 0.25rem;
+        padding: 0.425rem 0.5rem;
+
+        &[name="content"] {
+          flex-grow: 1;
+          resize: none;  //크기 조정 삭제
+        }
+      }
+    }
+
+    > .writer-container {
+      align-items: stretch;
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+      justify-content: flex-start;
+    }
+
+    > .spring {
+      flex-grow: 1;
+    }
+
+    > .--obj-button {
+      margin-top: 1rem;
+    }
+  }
+
+  > .title {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+}
 

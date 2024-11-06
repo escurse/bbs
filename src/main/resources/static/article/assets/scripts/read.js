@@ -74,3 +74,49 @@ const $main = document.getElementById('main');
         }
     }
 }
+
+{
+    const loadComments = () => {
+
+    };
+
+    const postComment = ($form) => {
+        if ($form['nickname'].value === '') {
+            alert('작성자를 입력해 주세요.');
+            return;
+        }
+        if ($form['password'].value === '') {
+            alert('비밀번호를 입력해 주세요.');
+            return;
+        }
+        if ($form['content'].value === '') {
+            alert('내용을 입력해 주세요.');
+            return;
+        }
+        const xhr = new XMLHttpRequest();
+        const formData = new FormData();
+        formData.append('nickname', $form['nickname']);
+        formData.append('password', $form['password']);
+        formData.append('content', $form['content']);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== XMLHttpRequest.DONE) {
+                return;
+            }
+            if (xhr.status < 200 || xhr.status >= 300) {
+                alert('댓글을 작성하지 못했습니다. 잠시 후 다시 시도해 주세요.');
+                return;
+            }
+            $form['content'].value = '';
+            $form['content'].focus();
+            loadComments()
+        };
+        xhr.open('POST', '../comment/');
+        xhr.send(formData);
+    };
+
+    const $commentForm = document.getElementById('commentForm');
+    $commentForm.onsubmit = (e) => {
+        e.preventDefault();
+        postComment($commentForm);
+    }
+}

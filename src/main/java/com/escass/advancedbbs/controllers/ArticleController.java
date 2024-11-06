@@ -9,6 +9,7 @@ import com.escass.advancedbbs.services.BoardSerivce;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,11 +27,18 @@ public class ArticleController {
     private final ArticleService articleService;
     private final BoardSerivce boardSerivce;
 
-    @RequestMapping(value="/image", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getImage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("article/image");
-        return modelAndView;
+    @RequestMapping(value="/image", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<byte[]> getImage(@RequestParam(value="index", required = false, defaultValue = "0") int index) {
+        ImageEntity image = this.articleService.getImage(index);
+        if (image == null) {
+            return ResponseEntity.notFound().build();   // 응답 내용 없음, 상태 코드는 404(Not Found)인 상태로 응답을 내보냄.
+        }
+        return ResponseEntity
+                .ok()                                                               // 응답 상태 코드 200
+                .contentLength(image.getData().length)                              // 응답 내용 길이 설정
+                .contentType(MediaType.parseMediaType(image.getContentType()))      // 응답 MIME 타입 설정
+                .body(image.getData());                                             // 응답 내용 설정
     }
 
     @RequestMapping(value = "/image", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)

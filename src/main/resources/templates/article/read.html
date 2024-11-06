@@ -61,6 +61,26 @@
         <button class="button modify --obj-button -blue" name="modify">수정</button>
         <button class="button delete --obj-button -red" name="delete">삭제</button>
     </div>
+    <div class="comment-container">
+        <h2 class="title">댓글 (13)</h2>
+        <form id="commentForm" class="form">
+            <div class="writer-wrapper">
+                <label class="label">
+                    <span class="text">작성자</span>
+                    <input required type="text" class="field" name="nickname" minlength="1" maxlength="10">
+                </label>
+                <label class="label">
+                    <span class="text">비밀번호</span>
+                    <input required type="password" class="field" name="password" minlength="4" maxlength="50">
+                </label>
+            </div>
+            <label class="label spring">
+                <span class="text">내용</span>
+                <textarea required class="field" maxlength="100" minlength="1" name="content"></textarea>
+            </label>
+            <button class="--obj-button -blue" type="submit">댓글 쓰기</button>
+        </form>
+    </div>
 </main>
 </body>
 </html>

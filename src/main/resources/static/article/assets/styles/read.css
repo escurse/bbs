@@ -93,4 +93,69 @@
   flex-grow: 1;
 }
 
+#main > .comment-container {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+#main > .comment-container .form {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  gap: 0.375rem;
+  justify-content: flex-start;
+}
+#main > .comment-container .form .label {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  justify-content: flex-start;
+}
+#main > .comment-container .form .label:hover > .text {
+  color: rgb(134.5, 134.5, 134.5);
+}
+#main > .comment-container .form .label:hover > .field {
+  border-color: rgb(198.5, 198.5, 198.5);
+}
+#main > .comment-container .form .label:focus-within > .text {
+  color: #387aeb;
+}
+#main > .comment-container .form .label:focus-within > .field {
+  border-color: #387aeb;
+}
+#main > .comment-container .form .label > .text {
+  color: #a0a0a0;
+  font-size: 0.7rem;
+}
+#main > .comment-container .form .label > .field {
+  background-color: #ffffff;
+  border: 0.0625rem solid #e0e0e0;
+  border-radius: 0.25rem;
+  padding: 0.425rem 0.5rem;
+}
+#main > .comment-container .form .label > .field[name=content] {
+  flex-grow: 1;
+  resize: none;
+}
+#main > .comment-container .form > .writer-container {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  justify-content: flex-start;
+}
+#main > .comment-container .form > .spring {
+  flex-grow: 1;
+}
+#main > .comment-container .form > .--obj-button {
+  margin-top: 1rem;
+}
+#main > .comment-container > .title {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
 /*# sourceMappingURL=read.css.map */
