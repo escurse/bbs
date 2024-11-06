@@ -42,7 +42,7 @@
         <input required name="title" class="input title" maxlength="100" placeholder="제목을 입력해 주세요." th:value="${article.getTitle()}">
     </label>
     <label class="label">
-        <textarea name="content" class="content" th:utext="${article.getContent()}"></textarea>
+        <textarea name="content" class="content" th:text="${article.getContent()}"></textarea>
     </label>
     <div class="button-container">
         <div class="spring"></div>
