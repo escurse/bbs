@@ -406,10 +406,13 @@ ClassicEditor.create($main['content'], editorConfig).then((editor) => {
             $main['passwordCheck'].focus();
             return;
         }
+        const url = new URL(location.href);
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
+        formData.append('index', url.searchParams.get('index'));            // 주소에 있는 index
+        formData.append('oldPassword', url.searchParams.get('password'))    // 주소에 있는 password
         formData.append('nickname', $main['nickname'].value);
-        formData.append('password', $main['password'].value);
+        formData.append('password', $main['password'].value);               // 주소의 password와 분리하여 생각할 것. 검증 용도로 사용하지 말 것.
         formData.append('title', $main['title'].value);
         formData.append('content', editor.getData());
         xhr.onreadystatechange = () => {
