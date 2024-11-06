@@ -48,6 +48,34 @@ public class ArticleService {
         return this.articleMapper.updateArticle(article) > 0;
     }
 
+    public boolean modifyArticle(ArticleEntity article, String oldPassword) {
+        if (article == null ||
+            article.getIndex() < 1 ||
+            article.getNickname() == null || article.getNickname().length() < 2 || article.getNickname().length() > 10 ||
+            article.getPassword() == null || article.getPassword().length() < 4 || article.getPassword().length() > 50 ||
+            article.getTitle() == null || article.getTitle().isEmpty() || article.getTitle().length() > 100 ||
+            article.getContent() == null || article.getContent().isEmpty() || article.getContent().length() > 16_777_215 ||
+            oldPassword == null || oldPassword.length() < 4 || oldPassword.length() > 50) {
+            return false;
+        }
+        ArticleEntity dbArticle = this.articleMapper.selectArticleByIndex(article.getIndex());
+        if (dbArticle == null) {
+            return false;
+        }
+        if (dbArticle.getDeletedAt() != null) {
+            return false;
+        }
+        if (!dbArticle.getPassword().equals(oldPassword)) {
+            return false;
+        }
+        dbArticle.setNickname(article.getNickname());
+        dbArticle.setPassword(article.getPassword());
+        dbArticle.setTitle(article.getTitle());
+        dbArticle.setContent(article.getContent());
+        dbArticle.setUpdatedAt(LocalDateTime.now());
+        return this.articleMapper.updateArticle(dbArticle) > 0;
+    }
+
     public boolean write(ArticleEntity article) {
         if (article == null ||
             article.getBoardId() == null ||

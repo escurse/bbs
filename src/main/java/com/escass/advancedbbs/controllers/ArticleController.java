@@ -42,6 +42,15 @@ public class ArticleController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/modify", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchModify(@RequestParam(value = "oldPassword", required = false) String oldPassword, ArticleEntity article) {
+        boolean result = this.articleService.modifyArticle(article, oldPassword);
+        JSONObject response = new JSONObject();
+        response.put("result", result);
+        return response.toString();
+    }
+
     @RequestMapping(value = "/read", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getRead(@RequestParam(value = "index", required = false, defaultValue = "0") int index) {
         ModelAndView modelAndView = new ModelAndView();

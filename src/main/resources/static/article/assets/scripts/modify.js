@@ -430,7 +430,7 @@ ClassicEditor.create($main['content'], editorConfig).then((editor) => {
                 alert('게시글을 수정하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
             }
         };
-        xhr.open('POST', location.href);
+        xhr.open('PATCH', './modify');
         xhr.send(formData);
     };
 });
