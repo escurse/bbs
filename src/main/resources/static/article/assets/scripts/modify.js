@@ -425,7 +425,7 @@ ClassicEditor.create($main['content'], editorConfig).then((editor) => {
             }
             const response = JSON.parse(xhr.responseText);
             if (response['result'] === true) {
-                location.href = `./read?index=${response['index']}`;
+                location.href = `./read?index=${url.searchParams.get('index')}`;
             } else {
                 alert('게시글을 수정하지 못하였습니다. 잠시 후 다시 시도해 주세요.');
             }
