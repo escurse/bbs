@@ -90,6 +90,13 @@ public class ArticleService {
         return this.imageMapper.insertImage(image) > 0;
     }
 
+    public ImageEntity downloadImage(int index) {
+        if (index < 1) {
+            return null;
+        }
+        return this.imageMapper.selectImageByIndex(index);
+    }
+
     public boolean write(ArticleEntity article) {
         if (article == null ||
             article.getBoardId() == null ||
