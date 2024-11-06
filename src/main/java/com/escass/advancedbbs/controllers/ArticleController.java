@@ -2,7 +2,7 @@ package com.escass.advancedbbs.controllers;
 
 import com.escass.advancedbbs.entities.ArticleEntity;
 import com.escass.advancedbbs.entities.BoardEntity;
-import com.escass.advancedbbs.mappers.ArticleMapper;
+import com.escass.advancedbbs.entities.ImageEntity;
 import com.escass.advancedbbs.results.article.DeleteArticleResult;
 import com.escass.advancedbbs.services.ArticleService;
 import com.escass.advancedbbs.services.BoardSerivce;
@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping(value = "/article")
@@ -22,6 +25,21 @@ import org.springframework.web.servlet.ModelAndView;
 public class ArticleController {
     private final ArticleService articleService;
     private final BoardSerivce boardSerivce;
+
+    @RequestMapping(value = "/image", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public String postImage(@RequestParam (value="upload")MultipartFile file) throws IOException {
+        ImageEntity image = new ImageEntity();
+        image.setData(file.getBytes());
+        image.setContentType(file.getContentType());
+        image.setName(file.getOriginalFilename());
+        JSONObject response = new JSONObject();
+        boolean result = this.articleService.uploadImage(image);
+        if (result) {
+            response.put("url", "/article/image?index=" + image.getIndex());
+        }
+        return response.toString();
+    }
 
     @RequestMapping(value = "/modify", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getModify(@RequestParam(value = "index", required = false, defaultValue = "0") int index,

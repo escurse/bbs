@@ -1,7 +1,9 @@
 package com.escass.advancedbbs.services;
 
 import com.escass.advancedbbs.entities.ArticleEntity;
+import com.escass.advancedbbs.entities.ImageEntity;
 import com.escass.advancedbbs.mappers.ArticleMapper;
+import com.escass.advancedbbs.mappers.ImageMapper;
 import com.escass.advancedbbs.results.article.DeleteArticleResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ArticleService {
     private final ArticleMapper articleMapper;
+    private final ImageMapper imageMapper;
 
     public DeleteArticleResult deleteArticle(int index, String password) {
         if (index < 1 || password == null || password.length() < 4 || password.length() > 50) {
@@ -74,6 +77,17 @@ public class ArticleService {
         dbArticle.setContent(article.getContent());
         dbArticle.setUpdatedAt(LocalDateTime.now());
         return this.articleMapper.updateArticle(dbArticle) > 0;
+    }
+
+    public boolean uploadImage(ImageEntity image) {
+        if (image == null ||
+            image.getData() == null || image.getData().length == 0 ||
+            image.getContentType() == null || image.getContentType().isEmpty() ||
+            image.getName() == null || image.getName().isEmpty()) {
+            return false;
+        }
+        image.setCreatedAt(LocalDateTime.now());
+        return this.imageMapper.insertImage(image) > 0;
     }
 
     public boolean write(ArticleEntity article) {

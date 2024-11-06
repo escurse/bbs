@@ -383,6 +383,9 @@ const editorConfig = {
     },
     table: {
         contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
+    },
+    simpleUpload: {
+        uploadUrl: "./image"
     }
 };
 
