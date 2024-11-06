@@ -11,4 +11,16 @@
         INSERT INTO `advanced_bbs`.`images` (`data`, `content_type`, `name`, `created_at`)
         VALUES (#{data}, #{contentType}, #{name}, #{createdAt})
     </insert>
+
+    <select id="selectImageByIndex"
+            resultType="com.escass.advancedbbs.entities.ImageEntity">
+        SELECT `index`        AS `index`,
+               `data`         AS `data`,
+               `content_type` AS `contentType`,
+               `name`         AS `name`,
+               `created_at`   AS `createdAt`
+        FROM `advanced_bbs`.`images`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
 </mapper>
