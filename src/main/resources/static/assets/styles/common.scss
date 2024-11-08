@@ -59,6 +59,12 @@ ol, ul {
   text-decoration: none;
   user-select: none;
 
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  justify-content: center;
+
   &.-light {
     @include applyButtonColorScheme(#a0a0a0);
   }

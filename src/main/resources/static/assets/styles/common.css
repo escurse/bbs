@@ -44,6 +44,11 @@ ol, ul {
   text-align: center;
   text-decoration: none;
   user-select: none;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  justify-content: center;
 }
 .--obj-button.-light {
   background-color: #a0a0a0;
