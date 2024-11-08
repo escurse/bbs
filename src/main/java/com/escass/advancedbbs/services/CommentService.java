@@ -1,12 +1,17 @@
 package com.escass.advancedbbs.services;
 
 import com.escass.advancedbbs.entities.CommentEntity;
+import com.escass.advancedbbs.mappers.CommentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
 public class CommentService {
+    private final CommentMapper commentMapper;
+
     public boolean writeComment(CommentEntity comment) {
         if (comment == null ||
             comment.getArticleIndex() < 1 ||
@@ -16,6 +21,9 @@ public class CommentService {
             comment.getContent() == null || comment.getContent().isEmpty() || comment.getContent().length() > 100) {
             return false;
         }
-        return true;
+        comment.setCreatedAt(LocalDateTime.now());
+        comment.setUpdatedAt(null);
+        comment.setDeletedAt(null);
+        return this.commentMapper.insertComment(comment) > 0;
     }
 }

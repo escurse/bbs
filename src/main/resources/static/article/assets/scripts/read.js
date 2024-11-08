@@ -97,9 +97,9 @@ const $main = document.getElementById('main');
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
         formData.append('articleIndex', url.searchParams.get('index'));
-        formData.append('nickname', $form['nickname']);
-        formData.append('password', $form['password']);
-        formData.append('content', $form['content']);
+        formData.append('nickname', $form['nickname'].value);
+        formData.append('password', $form['password'].value);
+        formData.append('content', $form['content'].value);
         xhr.onreadystatechange = () => {
             if (xhr.readyState !== XMLHttpRequest.DONE) {
                 return;
