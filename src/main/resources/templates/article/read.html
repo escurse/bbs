@@ -80,6 +80,39 @@
             </label>
             <button class="--obj-button -blue" type="submit">댓글 쓰기</button>
         </form>
+        <ul class="list">
+            <li class="item">
+                <div class="top">
+                    <span class="nickname">작성자</span>
+                    <span class="spring"></span>
+                    <span class="datetime">2024</span>
+                    <label class="link">
+                        <input class="checkbox" name="toggle" type="checkbox">
+                        <span class="text">수정</span>
+                    </label>
+                    <button class="button delete --obj-button -red" name="delete" type="button">삭제</button>
+                </div>
+                <div class="content">내용</div>
+                <form class="form">
+                    <input type="hidden">
+                    <div class="writer-wrapper">
+                        <label class="label">
+                            <span class="text">작성자</span>
+                            <input required type="text" class="field" name="nickname" minlength="1" maxlength="10">
+                        </label>
+                        <label class="label">
+                            <span class="text">비밀번호</span>
+                            <input required type="password" class="field" name="password" minlength="4" maxlength="50">
+                        </label>
+                    </div>
+                    <label class="label spring">
+                        <span class="text">내용</span>
+                        <textarea required class="field" maxlength="100" minlength="1" name="content"></textarea>
+                    </label>
+                    <button class="--obj-button -blue" type="submit">댓글 쓰기</button>
+                </form>
+            </li>
+        </ul>
     </div>
 </main>
 </body>

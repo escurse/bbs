@@ -27,10 +27,13 @@ public class CommentController {
         return response.toString();
     }
 
-    @RequestMapping(value="/comments", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value="/comments", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<CommentEntity[]> getComments(@RequestParam(value = "articleIndex", required = false, defaultValue = "0") int articleIndex) {
-//        this.commentService.getCommentsByArticleIndex(articleIndex);
-        return null;
+        CommentEntity[] comments = this.commentService.getCommentsByArticleIndex(articleIndex);
+        if (comments == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(comments);
     }
 }

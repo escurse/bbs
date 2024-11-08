@@ -24,6 +24,5 @@
                `deleted_at`    AS `deletedAt`
         FROM `advanced_bbs`.`comments`
         WHERE article_index = #{articleIndex}
-        LIMIT 1
     </select>
 </mapper>
