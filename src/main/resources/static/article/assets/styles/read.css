@@ -190,24 +190,14 @@
 #main > .comment-container > .list > .item > .top > .datetime {
   color: #bdbdbd;
 }
-#main > .comment-container > .list > .item > .top > .link {
-  cursor: pointer;
-  text-decoration: none;
-  user-select: none;
-}
-#main > .comment-container > .list > .item > .top > .link:hover {
-  text-decoration: underline;
-}
-#main > .comment-container > .list > .item > .top > .link > .checkbox {
-  display: none;
-}
-#main > .comment-container > .list > .item > .top:has([name=toggle]:checked) ~ .form {
-  display: flex;
-}
 #main > .comment-container > .list > .item > .content {
   background-color: #ffffff;
   border-radius: 0.25rem;
   padding: 0.375rem 0.5rem;
+}
+#main > .comment-container > .list > .item > .action-container:has([type=radio][value=reply]:checked) ~ .form.reply,
+#main > .comment-container > .list > .item > .action-container:has([type=radio][value=modify]:checked) ~ .form.modify {
+  display: flex;
 }
 #main > .comment-container > .list > .item > .form {
   display: none;
