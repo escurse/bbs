@@ -86,14 +86,10 @@
                     <span class="nickname">작성자</span>
                     <span class="spring"></span>
                     <span class="datetime">2024</span>
-                    <label class="link">
-                        <input class="checkbox" name="toggle" type="checkbox">
-                        <span class="text">수정</span>
-                    </label>
-                    <button class="link" name="delete" type="button">삭제</button>
                 </div>
                 <div class="content">내용</div>
                 <div class="action-container">
+                    <input checked id="commentNoAction0" name="comment0" type="radio" value="noAction">
                     <label class="action">
                         <input name="comment0" type="radio" value="reply">
                         <span class="text">답글 쓰기</span>
@@ -120,7 +116,10 @@
                         <span class="text">내용</span>
                         <textarea required class="field" maxlength="100" minlength="1" name="content"></textarea>
                     </label>
-                    <button class="--obj-button -blue" type="submit">답글 쓰기</button>
+                    <div class="button-container">
+                        <button class="--obj-button -blue" type="submit">답글 쓰기</button>
+                        <label class="--obj-button -light" for="commentNoAction0">취소</label>
+                    </div>
                 </form>
                 <form class="form modify">
                     <input type="hidden">
@@ -138,7 +137,10 @@
                         <span class="text">내용</span>
                         <textarea required class="field" maxlength="100" minlength="1" name="content"></textarea>
                     </label>
-                    <button class="--obj-button -blue" type="submit">댓글 수정</button>
+                    <div class="button-container">
+                        <button class="--obj-button -blue" type="submit">댓글 수정</button>
+                        <label class="--obj-button -light" for="commentNoAction0">취소</label>
+                    </div>
                 </form>
             </li>
         </ul>
