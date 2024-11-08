@@ -147,11 +147,14 @@ const $main = document.getElementById('main');
             postComment($replyForm);
         }
         $list.append($item);
+        return $item;
     };
 
-    const appendComments = (comments) => {
-        for (const comment of comments) {
-            appendComment(comment);
+    const appendComments = (allComments, targetComments, step) => {
+        for (const comment of targetComments) {
+            appendComment(comment).style.marginLeft = `${step * 50}px`;
+            const subComments = allComments.filter((x) => x['commentIndex'] === comment['index']);
+            appendComments(allComments, subComments, step + 1);
         }
     }
 
@@ -169,9 +172,7 @@ const $main = document.getElementById('main');
             }
             const allComments = JSON.parse(xhr.responseText);
             const rootComments = allComments.filter((x) => x['commentIndex'] == null); // 대댓글 제외
-            for (const comment of allComments) {
-                appendComment(comment);
-            }
+            appendComments(allComments, rootComments, 0);
         };
         xhr.open('GET', `../comment/comments?articleIndex=${url.searchParams.get('index')}`);
         xhr.send();
@@ -213,6 +214,7 @@ const $main = document.getElementById('main');
             }
             $form['content'].value = '';
             $form['content'].focus();
+            loadComments();
         };
         xhr.open('POST', '../comment/');
         xhr.send(formData);
