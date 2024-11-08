@@ -77,7 +77,87 @@ const $main = document.getElementById('main');
 
 {
     const loadComments = () => {
-
+        const url = new URL(location.href);
+        const $list = $main.querySelector(':scope > .comment-container > .list');
+        $list.innerHTML = '';
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== XMLHttpRequest.DONE) {
+                return;
+            }
+            if (xhr.status < 200 || xhr.status >= 300) {
+                alert('댓글 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
+                return;
+            }
+            const comments = JSON.parse(xhr.responseText);
+            for (const comment of comments) {
+                const i = comment['index'];
+                const $item = new DOMParser().parseFromString(`            <li class="item">
+                <div class="top">
+                    <span class="nickname">${comment['nickname']}</span>
+                    <span class="spring"></span>
+                    <span class="datetime">${comment['createdAt']}</span>
+                </div>
+                <div class="content">${comment['content']}</div>
+                <div class="action-container">
+                    <input checked id="commentNoAction${i}" name="comment${i}" type="radio" value="noAction">
+                    <label class="action">
+                        <input name="comment${i}" type="radio" value="reply">
+                        <span class="text">답글 쓰기</span>
+                    </label>
+                    <label class="action">
+                        <input name="comment${i}" type="radio" value="modify">
+                        <span class="text">수정</span>
+                    </label>
+                    <button class="action" name="delete" type="button">삭제</button>
+                </div>
+                <form class="form reply">
+                    <input name="commentIndex" type="hidden" value="${comment['index']}">
+                    <div class="writer-wrapper">
+                        <label class="label">
+                            <span class="text">작성자</span>
+                            <input required type="text" class="field" name="nickname" minlength="1" maxlength="10">
+                        </label>
+                        <label class="label">
+                            <span class="text">비밀번호</span>
+                            <input required type="password" class="field" name="password" minlength="4" maxlength="50">
+                        </label>
+                    </div>
+                    <label class="label spring">
+                        <span class="text">내용</span>
+                        <textarea required class="field" maxlength="100" minlength="1" name="content"></textarea>
+                    </label>
+                    <div class="button-container">
+                        <button class="--obj-button -blue" type="submit">답글 쓰기</button>
+                        <label class="--obj-button -light" for="commentNoAction${i}">취소</label>
+                    </div>
+                </form>
+                <form class="form modify">
+                    <div class="writer-wrapper">
+                        <label class="label">
+                            <span class="text">작성자</span>
+                            <input required type="text" class="field" name="nickname" minlength="1" maxlength="10" value="${comment['nickname']}">
+                        </label>
+                        <label class="label">
+                            <span class="text">비밀번호</span>
+                            <input required type="password" class="field" name="password" minlength="4" maxlength="50">
+                        </label>
+                    </div>
+                    <label class="label spring">
+                        <span class="text">내용</span>
+                        <textarea required class="field" maxlength="100" minlength="1" name="content">${comment['content']}</textarea>
+                    </label>
+                    <div class="button-container">
+                        <button class="--obj-button -blue" type="submit">댓글 수정</button>
+                        <label class="--obj-button -light" for="commentNoAction${i}">취소</label>
+                    </div>
+                </form>
+            </li>
+`, 'text/html').querySelector('li.item');
+            }
+        };
+        xhr.open('GET',`../comment/comments?articleIndex=${url.searchParams.get('index')}`);
+        xhr.send();
     };
 
     const postComment = ($form) => {
