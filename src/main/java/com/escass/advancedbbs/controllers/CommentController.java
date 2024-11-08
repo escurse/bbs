@@ -30,6 +30,7 @@ public class CommentController {
     @RequestMapping(value="/comments", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
     public ResponseEntity<CommentEntity[]> getComments(@RequestParam(value = "articleIndex", required = false, defaultValue = "0") int articleIndex) {
+//        this.commentService.getCommentsByArticleIndex(articleIndex);
         return null;
     }
 }

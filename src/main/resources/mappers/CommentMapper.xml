@@ -13,7 +13,15 @@
 
     <select id="selectCommentByArticleIndex"
             resultType="com.escass.advancedbbs.entities.CommentEntity">
-        SELECT *
+        SELECT `index`         AS `index`,
+               `article_index` AS `articleIndex`,
+               `comment_index` AS `commentIndex`,
+               `nickname`      AS `nickname`,
+               `password`      AS `password`,
+               `content`       AS `content`,
+               `created_at`    AS `createdAt`,
+               `updated_at`    AS `updatedAt`,
+               `deleted_at`    AS `deletedAt`
         FROM `advanced_bbs`.`comments`
         WHERE article_index = #{articleIndex}
         LIMIT 1
