@@ -10,4 +10,12 @@
     VALUES (#{articleIndex}, #{commentIndex}, #{nickname}, #{password}, #{content}, #{createdAt}, #{updatedAt},
             #{deletedAt})
 </insert>
+
+    <select id="selectCommentByArticleIndex"
+            resultType="com.escass.advancedbbs.entities.CommentEntity">
+        SELECT *
+        FROM `advanced_bbs`.`comments`
+        WHERE article_index = #{articleIndex}
+        LIMIT 1
+    </select>
 </mapper>

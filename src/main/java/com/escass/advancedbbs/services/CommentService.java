@@ -12,6 +12,13 @@ import java.time.LocalDateTime;
 public class CommentService {
     private final CommentMapper commentMapper;
 
+    public CommentEntity[] getCommentsByArticleIndex(int articleIndex) {
+        if (articleIndex < 1) {
+            return null;
+        }
+        return this.commentMapper.selectCommentByArticleIndex(articleIndex);
+    }
+
     public boolean writeComment(CommentEntity comment) {
         if (comment == null ||
             comment.getArticleIndex() < 1 ||

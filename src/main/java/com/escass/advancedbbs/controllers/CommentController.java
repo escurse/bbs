@@ -5,9 +5,11 @@ import com.escass.advancedbbs.services.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -23,5 +25,11 @@ public class CommentController {
         JSONObject response = new JSONObject();
         response.put("result", result);
         return response.toString();
+    }
+
+    @RequestMapping(value="/comments", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public ResponseEntity<CommentEntity[]> getComments(@RequestParam(value = "articleIndex", required = false, defaultValue = "0") int articleIndex) {
+        return null;
     }
 }

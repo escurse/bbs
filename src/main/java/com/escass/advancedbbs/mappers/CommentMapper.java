@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Param;
 public interface CommentMapper {
     int insertComment(CommentEntity comment);
 
-//    CommentEntity selectCommentById(@Param(value="index") int index);
+    CommentEntity[] selectCommentByArticleIndex(@Param(value="articleIndex") int articleIndex);
 }
