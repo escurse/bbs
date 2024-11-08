@@ -76,23 +76,10 @@ const $main = document.getElementById('main');
 }
 
 {
-    const loadComments = () => {
-        const url = new URL(location.href);
-        const $list = $main.querySelector(':scope > .comment-container > .list');
-        $list.innerHTML = '';
-        const xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState !== XMLHttpRequest.DONE) {
-                return;
-            }
-            if (xhr.status < 200 || xhr.status >= 300) {
-                alert('댓글 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
-                return;
-            }
-            const comments = JSON.parse(xhr.responseText);
-            for (const comment of comments) {
-                const i = comment['index'];
-                const $item = new DOMParser().parseFromString(`            <li class="item">
+    const $list = $main.querySelector(':scope > .comment-container > .list');
+    const appendComment = (comment) => {
+        const i = comment['index'];
+        const $item = new DOMParser().parseFromString(`            <li class="item">
                 <div class="top">
                     <span class="nickname">${comment['nickname']}</span>
                     <span class="spring"></span>
@@ -154,11 +141,43 @@ const $main = document.getElementById('main');
                 </form>
             </li>
 `, 'text/html').querySelector('li.item');
+        const $replyForm = $item.querySelector('.form.reply');
+        $replyForm.onsubmit = (e) => {
+            e.preventDefault();
+            postComment($replyForm);
+        }
+        $list.append($item);
+    };
+
+    const appendComments = (comments) => {
+        for (const comment of comments) {
+            appendComment(comment);
+        }
+    }
+
+    const loadComments = () => {
+        const url = new URL(location.href);
+        $list.innerHTML = '';
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== XMLHttpRequest.DONE) {
+                return;
+            }
+            if (xhr.status < 200 || xhr.status >= 300) {
+                alert('댓글 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
+                return;
+            }
+            const allComments = JSON.parse(xhr.responseText);
+            const rootComments = allComments.filter((x) => x['commentIndex'] == null); // 대댓글 제외
+            for (const comment of allComments) {
+                appendComment(comment);
             }
         };
-        xhr.open('GET',`../comment/comments?articleIndex=${url.searchParams.get('index')}`);
+        xhr.open('GET', `../comment/comments?articleIndex=${url.searchParams.get('index')}`);
         xhr.send();
     };
+
+    loadComments();
 
     const postComment = ($form) => {
         if ($form['nickname'].value === '') {
@@ -176,6 +195,10 @@ const $main = document.getElementById('main');
         const url = new URL(location.href);
         const xhr = new XMLHttpRequest();
         const formData = new FormData();
+        if ($form['commentIndex'] != null) {
+            //     != null === (!== null && !== undefined)
+            formData.append('commentIndex', $form['commentIndex'].value);
+        }
         formData.append('articleIndex', url.searchParams.get('index'));
         formData.append('nickname', $form['nickname'].value);
         formData.append('password', $form['password'].value);
@@ -190,7 +213,6 @@ const $main = document.getElementById('main');
             }
             $form['content'].value = '';
             $form['content'].focus();
-            loadComments()
         };
         xhr.open('POST', '../comment/');
         xhr.send(formData);
