@@ -172,6 +172,35 @@
   gap: 0.375rem;
   justify-content: flex-start;
 }
+#main > .comment-container > .list > .item > .top {
+  background-color: #424242;
+  border-radius: 0.25rem;
+  color: #ffffff;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.375rem;
+  justify-content: flex-start;
+}
+#main > .comment-container > .list > .item > .top > .spring {
+  flex-grow: 1;
+}
+#main > .comment-container > .list > .item > .top > .datetime {
+  color: #bdbdbd;
+}
+#main > .comment-container > .list > .item > .top > .link {
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+}
+#main > .comment-container > .list > .item > .top > .link:hover {
+  text-decoration: underline;
+}
+#main > .comment-container > .list > .item > .top > .link > .checkbox {
+  display: none;
+}
 #main > .comment-container > .list > .item > .top:has([name=toggle]:checked) ~ .form {
   display: flex;
 }

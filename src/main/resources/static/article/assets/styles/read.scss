@@ -212,6 +212,42 @@
     gap: 0.375rem;
     justify-content: flex-start;
 
+    > .top {
+      background-color: #424242;
+      border-radius: 0.25rem;
+      color: #ffffff;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.5rem;
+
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      gap: 0.375rem;
+      justify-content: flex-start;
+
+      > .spring {
+        flex-grow: 1;
+      }
+
+      > .datetime {
+        color: #bdbdbd;
+      }
+
+      > .link {
+        cursor: pointer;
+        text-decoration: none;
+        user-select: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        > .checkbox {
+          display: none;
+        }
+      }
+    }
+
     > .top:has([name="toggle"]:checked) ~ .form {
       display: flex;
     }
