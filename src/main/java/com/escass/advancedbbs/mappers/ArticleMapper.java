@@ -1,6 +1,7 @@
 package com.escass.advancedbbs.mappers;
 
 import com.escass.advancedbbs.entities.ArticleEntity;
+import com.escass.advancedbbs.vos.ArticleVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,4 +11,6 @@ public interface ArticleMapper {
     int updateArticle(ArticleEntity article);
 
     ArticleEntity selectArticleByIndex(@Param("index") int index);
+
+    ArticleVo[] selectArticleByBoardId(@Param("boardId") String boardId);
 }

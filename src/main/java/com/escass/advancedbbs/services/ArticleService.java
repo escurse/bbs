@@ -5,6 +5,7 @@ import com.escass.advancedbbs.entities.ImageEntity;
 import com.escass.advancedbbs.mappers.ArticleMapper;
 import com.escass.advancedbbs.mappers.ImageMapper;
 import com.escass.advancedbbs.results.article.DeleteArticleResult;
+import com.escass.advancedbbs.vos.ArticleVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,13 @@ public class ArticleService {
             return null;
         }
         return this.articleMapper.selectArticleByIndex(index);
+    }
+
+    public ArticleVo[] getArticlesByBoardId(String boardId) {
+        if (boardId == null) {
+            return null;
+        }
+        return this.articleMapper.selectArticleByBoardId(boardId);
     }
 
     public ImageEntity getImage(int index) {

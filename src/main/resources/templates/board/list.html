@@ -32,12 +32,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr th:each="article : ${articles}">
             <td th:text="${article.getIndex()}"></td>
-            <td th:text="${article.getTitle()}"></td>
+            <td>
+                <a th:text="${article.getTitle()}" th:href="@{'/article/read' (index=${article.getIndex()})}"></a>
+                <b>[<span th:text="${article.getCommentCount()}"></span>]</b>
+            </td>
             <td th:text="${article.getNickname()}"></td>
             <td th:text="${article.getView()}"></td>
-            <td th:text="${article.getCreatedAt()}"></td>
+            <td th:text="${#temporals.format(article.getCreatedAt(), 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>

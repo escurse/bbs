@@ -70,6 +70,16 @@
           background-color: #ffffff;
           padding: 0.5rem 0.75rem;
           white-space: nowrap;
+
+          &:nth-of-type(2) > a {
+            color: inherit;
+            text-decoration: none;
+            white-space: break-spaces;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
         }
       }
     }

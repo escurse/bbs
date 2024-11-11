@@ -54,6 +54,14 @@
   padding: 0.5rem 0.75rem;
   white-space: nowrap;
 }
+#main > .article-table > tbody > tr > td:nth-of-type(2) > a {
+  color: inherit;
+  text-decoration: none;
+  white-space: break-spaces;
+}
+#main > .article-table > tbody > tr > td:nth-of-type(2) > a:hover {
+  text-decoration: underline;
+}
 #main > .button-container {
   align-items: stretch;
   display: flex;

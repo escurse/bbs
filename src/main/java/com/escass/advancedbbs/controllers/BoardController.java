@@ -1,6 +1,5 @@
 package com.escass.advancedbbs.controllers;
 
-import com.escass.advancedbbs.entities.ArticleEntity;
 import com.escass.advancedbbs.entities.BoardEntity;
 import com.escass.advancedbbs.services.ArticleService;
 import com.escass.advancedbbs.services.BoardSerivce;
@@ -20,10 +19,8 @@ public class BoardController {
     private final ArticleService articleService;
 
     @RequestMapping(value ="/list", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getList(@RequestParam(value = "id", required = false) String id,
-                                @RequestParam(value = "index", required = false, defaultValue = "1") int index) {
+    public ModelAndView getList(@RequestParam(value = "id", required = false) String id) {
         BoardEntity board = this.boardSerivce.getBoard(id);
-        ArticleEntity article = this.articleService.getArticle(index);
 //        if (board == null) {
 //            System.out.println("그런 게시판 없음");
 //        } else {
@@ -31,7 +28,9 @@ public class BoardController {
 //        }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("board", board);
-        modelAndView.addObject("article", article);
+        if (board != null) {
+            modelAndView.addObject("articles", this.articleService.getArticlesByBoardId(id));
+        }
         modelAndView.setViewName("board/list");
         return modelAndView;
     }
