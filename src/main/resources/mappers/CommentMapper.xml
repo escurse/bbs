@@ -46,8 +46,7 @@
     <update id="updateComment"
             parameterType="com.escass.advancedbbs.entities.CommentEntity">
         UPDATE `advanced_bbs`.`comments`
-        SET `index`         = #{index},
-            `article_index` = #{articleIndex},
+        SET `article_index` = #{articleIndex},
             `comment_index` = #{commentIndex},
             `nickname`      = #{nickname},
             `password`      = #{password},
