@@ -24,5 +24,38 @@
                `deleted_at`    AS `deletedAt`
         FROM `advanced_bbs`.`comments`
         WHERE article_index = #{articleIndex}
+        AND `deleted_at` IS NULL
     </select>
+
+    <select id="selectCommentByIndex"
+            resultType="com.escass.advancedbbs.entities.CommentEntity">
+        SELECT `index`         AS `index`,
+               `article_index` AS `articleIndex`,
+               `comment_index` AS `commentIndex`,
+               `nickname`      AS `nickname`,
+               `password`      AS `password`,
+               `content`       AS `content`,
+               `created_at`    AS `createdAt`,
+               `updated_at`    AS `updatedAt`,
+               `deleted_at`    AS `deletedAt`
+        FROM `advanced_bbs`.`comments`
+        WHERE `index` = #{index}
+        LIMIT 1
+    </select>
+
+    <update id="updateComment"
+            parameterType="com.escass.advancedbbs.entities.CommentEntity">
+        UPDATE `advanced_bbs`.`comments`
+        SET `index`         = #{index},
+            `article_index` = #{articleIndex},
+            `comment_index` = #{commentIndex},
+            `nickname`      = #{nickname},
+            `password`      = #{password},
+            `content`       = #{content},
+            `created_at`    = #{createdAt},
+            `updated_at`    = #{updatedAt},
+            `deleted_at`    = #{deletedAt}
+        WHERE `index` = #{index}
+        LIMIT 1
+    </update>
 </mapper>

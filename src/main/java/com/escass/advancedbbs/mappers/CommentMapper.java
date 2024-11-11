@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface CommentMapper {
     int insertComment(CommentEntity comment);
+    int updateComment(CommentEntity comment);
 
-    CommentEntity[] selectCommentByArticleIndex(@Param(value="articleIndex") int articleIndex);
+    CommentEntity selectCommentByIndex(@Param("index") int index);
+
+    CommentEntity[] selectCommentByArticleIndex(@Param("articleIndex") int articleIndex);
 }
