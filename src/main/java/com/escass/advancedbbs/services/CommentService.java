@@ -2,7 +2,6 @@ package com.escass.advancedbbs.services;
 
 import com.escass.advancedbbs.entities.CommentEntity;
 import com.escass.advancedbbs.mappers.CommentMapper;
-import com.escass.advancedbbs.results.article.DeleteArticleResult;
 import com.escass.advancedbbs.results.comment.DeleteCommentResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

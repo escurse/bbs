@@ -1,7 +1,6 @@
 package com.escass.advancedbbs.controllers;
 
 import com.escass.advancedbbs.entities.CommentEntity;
-import com.escass.advancedbbs.results.article.DeleteArticleResult;
 import com.escass.advancedbbs.results.comment.DeleteCommentResult;
 import com.escass.advancedbbs.services.CommentService;
 import lombok.RequiredArgsConstructor;
