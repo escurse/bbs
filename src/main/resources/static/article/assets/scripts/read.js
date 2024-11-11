@@ -88,7 +88,7 @@ const $main = document.getElementById('main');
                 const response = JSON.parse(xhr.responseText);
                 switch (response['result']) {
                     case 'failure':
-                        alert('댓글을 삭제하지 못했습니다. 이미 삭제된 게시글일 수도 있습니다. 잠시 후 다시 시도해 주세요.');
+                        alert('댓글을 삭제하지 못했습니다. 이미 삭제된 댓글일 수도 있습니다. 잠시 후 다시 시도해 주세요.');
                         break;
                     case 'failure_password':
                         alert('댓글을 삭제하지 못했습니다. 암호가 올바르지 않습니다.');
@@ -96,6 +96,8 @@ const $main = document.getElementById('main');
                     case 'success':
                         alert('댓글을 성공적으로 삭제했습니다.');
                         loadComments();
+                        $cover.classList.remove('--visible');
+                        $passwordDialog.classList.remove('--visible');
                         break;
                     default:
                         alert('서버가 알 수 없는 응답을 반환했습니다. 삭제 결과를 반드시 확인해 주세요.');
@@ -104,8 +106,6 @@ const $main = document.getElementById('main');
             }
             xhr.open('DELETE', '../comment/');
             xhr.send(formData);
-            $cover.classList.remove('--visible');
-            $passwordDialog.classList.remove('--visible');
         }
     }
 }
@@ -158,7 +158,7 @@ const appendComment = (comment) => {
                     <div class="writer-wrapper">
                         <label class="label">
                             <span class="text">작성자</span>
-                            <input required type="text" class="field" name="nickname" minlength="1" maxlength="10" value="${comment['nickname']}">
+                            <input readonly required type="text" class="field" name="nickname" minlength="1" maxlength="10" value="${comment['nickname']}">
                         </label>
                         <label class="label">
                             <span class="text">비밀번호</span>
@@ -184,6 +184,45 @@ const appendComment = (comment) => {
     const $modifyForm = $item.querySelector('.form.modify');
     $modifyForm.onsubmit = (e) => {
         e.preventDefault();
+        if ($modifyForm['password'].value === '') {
+            alert('비밀번호를 입력해 주세요.');
+            return;
+        }
+        if ($modifyForm['content'].value === '') {
+            alert('내용을 입력해 주세요.');
+            return;
+        }
+        const xhr = new XMLHttpRequest();
+        const formData = new FormData();
+        formData.append('index', comment['index']);
+        formData.append('password', $modifyForm['password'].value);
+        formData.append('content', $modifyForm['content'].value);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== XMLHttpRequest.DONE) {
+                return;
+            }
+            if (xhr.status < 200 || xhr.status >= 300) {
+                alert('댓글을 수정하지 못했습니다. 잠시 후 다시 시도해 주세요.');
+                return;
+            }
+            const response = JSON.parse(xhr.responseText);
+            switch (response['result']) {
+                case 'failure':
+                    alert('댓글을 수정하지 못했습니다. 이미 삭제된 댓글일 수도 있습니다. 잠시 후 다시 시도해 주세요.');
+                    break;
+                case 'failure_password':
+                    alert('댓글을 수정하지 못했습니다. 암호가 올바르지 않습니다.');
+                    break;
+                case 'success':
+                    loadComments();
+                    break;
+                default:
+                    alert('서버가 알 수 없는 응답을 반환했습니다. 수정 결과를 반드시 확인해 주세요.');
+                    break;
+            }
+        };
+        xhr.open('PATCH', '../comment/');
+        xhr.send(formData);
     }
     const $deleteButton = $item.querySelector('[name="delete"]');
     $deleteButton.onclick = () => {

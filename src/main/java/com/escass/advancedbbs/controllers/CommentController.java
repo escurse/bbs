@@ -2,6 +2,7 @@ package com.escass.advancedbbs.controllers;
 
 import com.escass.advancedbbs.entities.CommentEntity;
 import com.escass.advancedbbs.results.comment.DeleteCommentResult;
+import com.escass.advancedbbs.results.comment.ModifyCommentResult;
 import com.escass.advancedbbs.services.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
@@ -18,6 +19,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService commentService;
+
+    @RequestMapping(value = "/", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchIndex(@RequestParam(value="index", required = false, defaultValue = "0") int index,
+                             @RequestParam(value="password", required = false) String password,
+                             @RequestParam(value="content", required = false) String content) {
+        ModifyCommentResult result = this.commentService.modifyComment(index, password, content);
+        JSONObject response = new JSONObject();
+        response.put("result", result.name().toLowerCase());
+        return response.toString();
+    }
 
     @RequestMapping(value="/", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
