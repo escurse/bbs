@@ -44,10 +44,41 @@
         </tr>
         </tbody>
     </table>
+    <div class="move">
+        <a class="page first" th:if="${page.requestPage > page.movableMinPage}"
+           th:href="@{'/board/list' (id=${board.getId()}, page=${page.movableMinPage}, filter=${filter}, keyword=${keyword})}">&lt;&lt;</a>
+        <a class="page prev" th:if="${page.requestPage > page.movableMinPage}"
+           th:href="@{'/board/list' (id=${board.getId()}, page=${page.requestPage - 1}, filter=${filter}, keyword=${keyword})}">&lt;</a>
+        <div class="page-container">
+            <a class="page"
+               th:each="paging : ${#numbers.sequence(page.displayMinPage, page.displayMaxPage)}"
+               th:text="${paging}"
+               th:href="@{'/board/list' (id=${board.getId()}, page=${paging}, filter=${filter}, keyword=${keyword})}"
+               th:classappend="${paging == page.requestPage} ? 'selected'"></a>
+        </div>
+        <a class="page next" th:if="${page.requestPage < page.movableMaxPage}"
+           th:href="@{'/board/list' (id=${board.getId()}, page=${page.requestPage + 1}, filter=${filter}, keyword=${keyword})}">&gt;</a>
+        <a class="page last" th:if="${page.requestPage < page.movableMaxPage}"
+           th:href="@{'/board/list' (id=${board.getId()}, page=${page.movableMaxPage}, filter=${filter}, keyword=${keyword})}">&gt;&gt;</a>
+    </div>
     <div class="button-container">
         <div class="spring"></div>
         <a class="button write --obj-button -blue" th:href="@{'/article/write' (boardId=${board.getId()})}">글 쓰기</a>
     </div>
+    <form class="search-form">
+        <input name="id" type="hidden" th:value="${board.getId()}">
+        <label class="label">
+            <select name="filter" class="field">
+                <option th:selected="${filter != null && filter.equals('all')}" value="all">제목 + 내용</option>
+                <option th:selected="${filter != null && filter.equals('title')}" value="title">제목</option>
+                <option th:selected="${filter != null && filter.equals('nickname')}" value="nickname">닉네임</option>
+            </select>
+        </label>
+        <label class="label">
+            <input class="field" maxlength="10" minlength="0" name="keyword" type="text" th:value="${keyword}">
+        </label>
+        <button class="--obj-button -blue" type="submit">검색</button>
+    </form>
 </main>
 </body>
 </html>

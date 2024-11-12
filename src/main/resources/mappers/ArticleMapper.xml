@@ -16,16 +16,16 @@
 
     <select id="selectArticleByIndex"
             resultType="com.escass.advancedbbs.entities.ArticleEntity">
-        SELECT `index`                      AS `index`,
-               `board_id`                   AS `boardId`,
-               `nickname`                   AS `nickname`,
-               `password`                   AS `password`,
-               `title`                      AS `title`,
-               `content`                    AS `content`,
-               `view`                       AS `view`,
-               `created_at`                 AS `createdAt`,
-               `updated_at`                 AS `updatedAt`,
-               `deleted_at`                 AS `deletedAt`
+        SELECT `index`      AS `index`,
+               `board_id`   AS `boardId`,
+               `nickname`   AS `nickname`,
+               `password`   AS `password`,
+               `title`      AS `title`,
+               `content`    AS `content`,
+               `view`       AS `view`,
+               `created_at` AS `createdAt`,
+               `updated_at` AS `updatedAt`,
+               `deleted_at` AS `deletedAt`
         FROM `advanced_bbs`.`articles`
         WHERE `index` = #{index}
         LIMIT 1
@@ -49,16 +49,16 @@
 
     <select id="selectArticleByBoardId"
             resultType="com.escass.advancedbbs.vos.ArticleVo">
-        SELECT `index`                      AS `index`,
-               `board_id`                   AS `boardId`,
-               `nickname`                   AS `nickname`,
-               `password`                   AS `password`,
-               `title`                      AS `title`,
-               `content`                    AS `content`,
-               `view`                       AS `view`,
-               `created_at`                 AS `createdAt`,
-               `updated_at`                 AS `updatedAt`,
-               `deleted_at`                 AS `deletedAt`,
+        SELECT `index`                                                AS `index`,
+               `board_id`                                             AS `boardId`,
+               `nickname`                                             AS `nickname`,
+               `password`                                             AS `password`,
+               `title`                                                AS `title`,
+               `content`                                              AS `content`,
+               `view`                                                 AS `view`,
+               `created_at`                                           AS `createdAt`,
+               `updated_at`                                           AS `updatedAt`,
+               `deleted_at`                                           AS `deletedAt`,
                (SELECT COUNT(0)
                 FROM `advanced_bbs`.`comments`
                 WHERE `advanced_bbs`.`comments`.`article_index` = `advanced_bbs`.`articles`.`index`
@@ -67,5 +67,62 @@
         WHERE `board_id` = #{boardId}
           AND `deleted_at` IS NULL
         ORDER BY `index` DESC
+        LIMIT #{limitCount} OFFSET ${offsetCount}
+    </select>
+
+    <select id="selectArticleCountByBoardId"
+            resultType="_int">
+        SELECT COUNT(0)
+        FROM `advanced_bbs`.`articles`
+        WHERE `board_id` = #{boardId}
+          AND `deleted_at` IS NULL
+    </select>
+
+    <select id="selectArticleCountBySearch" resultType="_int">
+        SELECT COUNT(0)
+        FROM `advanced_bbs`.`articles`
+        WHERE `board_id` = #{boardId}
+        AND `deleted_at` IS NULL
+        <if test="filter.equals('all')">
+            AND (`title` LIKE CONCAT('%', #{keyword}, '%') OR `content` LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        <if test="filter.equals('title')">
+            AND `title` LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="filter.equals('nickname')">
+            AND `nickname` = #{keyword}
+        </if>
+    </select>
+
+    <select id="selectArticlesBySearch"
+            resultType="com.escass.advancedbbs.vos.ArticleVo">
+        SELECT `index` AS `index`,
+        `board_id` AS `boardId`,
+        `nickname` AS `nickname`,
+        `password` AS `password`,
+        `title` AS `title`,
+        `content` AS `content`,
+        `view` AS `view`,
+        `created_at` AS `createdAt`,
+        `updated_at` AS `updatedAt`,
+        `deleted_at` AS `deletedAt`,
+        (SELECT COUNT(0)
+        FROM `advanced_bbs`.`comments`
+        WHERE `advanced_bbs`.`comments`.`article_index` = `advanced_bbs`.`articles`.`index`
+        AND `advanced_bbs`.`comments`.`deleted_at` IS NULL) AS `commentCount`
+        FROM `advanced_bbs`.`articles`
+        WHERE `board_id` = #{boardId}
+        AND `deleted_at` IS NULL
+        <if test="filter.equals('all')">
+            AND (`title` LIKE CONCAT('%', #{keyword}, '%') OR `content` LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        <if test="filter.equals('title')">
+            AND `title` LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="filter.equals('nickname')">
+            AND `nickname` = #{keyword}
+        </if>
+        ORDER BY `index` DESC
+        LIMIT #{limitCount} OFFSET ${offsetCount}
     </select>
 </mapper>

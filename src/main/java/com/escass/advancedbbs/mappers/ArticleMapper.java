@@ -10,7 +10,21 @@ public interface ArticleMapper {
     int insertArticle(ArticleEntity article);
     int updateArticle(ArticleEntity article);
 
+    int selectArticleCountByBoardId(@Param("boardId") String boardId);
+
     ArticleEntity selectArticleByIndex(@Param("index") int index);
 
-    ArticleVo[] selectArticleByBoardId(@Param("boardId") String boardId);
+    int selectArticleCountBySearch(@Param("boardId") String boardId,
+                                   @Param("filter") String filter,
+                                   @Param("keyword") String keyword);
+
+    ArticleVo[] selectArticleByBoardId(@Param("boardId") String boardId,
+                                       @Param("limitCount") int limitCount,
+                                       @Param("offsetCount") int offsetCount);
+
+    ArticleVo[] selectArticlesBySearch(@Param("boardId") String boardId,
+                                       @Param("filter") String filter,
+                                       @Param("keyword") String keyword,
+                                       @Param("limitCount") int limitCount,
+                                       @Param("offsetCount") int offsetCount);
 }

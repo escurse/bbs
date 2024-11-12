@@ -6,7 +6,9 @@ import com.escass.advancedbbs.mappers.ArticleMapper;
 import com.escass.advancedbbs.mappers.ImageMapper;
 import com.escass.advancedbbs.results.article.DeleteArticleResult;
 import com.escass.advancedbbs.vos.ArticleVo;
+import com.escass.advancedbbs.vos.PageVo;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -44,11 +46,30 @@ public class ArticleService {
         return this.articleMapper.selectArticleByIndex(index);
     }
 
-    public ArticleVo[] getArticlesByBoardId(String boardId) {
+    public Pair<PageVo, ArticleVo[]> getArticlesByBoardId(String boardId, int page) {
+        page = Math.max(1, page);
         if (boardId == null) {
             return null;
         }
-        return this.articleMapper.selectArticleByBoardId(boardId);
+        int totalCount = this.articleMapper.selectArticleCountByBoardId(boardId);
+        PageVo pageVo = new PageVo(page, totalCount);
+        return Pair.of(pageVo, this.articleMapper.selectArticleByBoardId(boardId, pageVo.countPerPage, pageVo.offsetCount));
+    }
+
+    public Pair<PageVo, ArticleVo[]> searchArticles(String boardId, int page, String filter, String keyword) {
+        page = Math.max(1, page);
+        if (filter == null || (!filter.equals("all") && !filter.equals("title") && !filter.equals("nickname"))) {
+            filter = "all";
+        }
+        if (keyword == null) {
+            keyword = "";
+        }
+        if (boardId == null) {
+            return null;
+        }
+        int totalCount = this.articleMapper.selectArticleCountBySearch(boardId, filter, keyword);
+        PageVo pageVo = new PageVo(page, totalCount);
+        return Pair.of(pageVo, this.articleMapper.selectArticlesBySearch(boardId, filter, keyword, pageVo.countPerPage, pageVo.offsetCount));
     }
 
     public ImageEntity getImage(int index) {
@@ -68,12 +89,12 @@ public class ArticleService {
 
     public boolean modifyArticle(ArticleEntity article, String oldPassword) {
         if (article == null ||
-            article.getIndex() < 1 ||
-            article.getNickname() == null || article.getNickname().length() < 2 || article.getNickname().length() > 10 ||
-            article.getPassword() == null || article.getPassword().length() < 4 || article.getPassword().length() > 50 ||
-            article.getTitle() == null || article.getTitle().isEmpty() || article.getTitle().length() > 100 ||
-            article.getContent() == null || article.getContent().isEmpty() || article.getContent().length() > 16_777_215 ||
-            oldPassword == null || oldPassword.length() < 4 || oldPassword.length() > 50) {
+                article.getIndex() < 1 ||
+                article.getNickname() == null || article.getNickname().length() < 2 || article.getNickname().length() > 10 ||
+                article.getPassword() == null || article.getPassword().length() < 4 || article.getPassword().length() > 50 ||
+                article.getTitle() == null || article.getTitle().isEmpty() || article.getTitle().length() > 100 ||
+                article.getContent() == null || article.getContent().isEmpty() || article.getContent().length() > 16_777_215 ||
+                oldPassword == null || oldPassword.length() < 4 || oldPassword.length() > 50) {
             return false;
         }
         ArticleEntity dbArticle = this.articleMapper.selectArticleByIndex(article.getIndex());
@@ -96,9 +117,9 @@ public class ArticleService {
 
     public boolean uploadImage(ImageEntity image) {
         if (image == null ||
-            image.getData() == null || image.getData().length == 0 ||
-            image.getContentType() == null || image.getContentType().isEmpty() ||
-            image.getName() == null || image.getName().isEmpty()) {
+                image.getData() == null || image.getData().length == 0 ||
+                image.getContentType() == null || image.getContentType().isEmpty() ||
+                image.getName() == null || image.getName().isEmpty()) {
             return false;
         }
         image.setCreatedAt(LocalDateTime.now());
@@ -107,11 +128,11 @@ public class ArticleService {
 
     public boolean write(ArticleEntity article) {
         if (article == null ||
-            article.getBoardId() == null ||
-            article.getNickname() == null || article.getNickname().length() < 2 || article.getNickname().length() > 10 ||
-            article.getPassword() == null || article.getPassword().length() < 4 || article.getPassword().length() > 50 ||
-            article.getTitle() == null || article.getTitle().isEmpty() || article.getTitle().length() > 100 ||
-            article.getContent() == null || article.getContent().isEmpty() || article.getContent().length() > 16_777_215) {
+                article.getBoardId() == null ||
+                article.getNickname() == null || article.getNickname().length() < 2 || article.getNickname().length() > 10 ||
+                article.getPassword() == null || article.getPassword().length() < 4 || article.getPassword().length() > 50 ||
+                article.getTitle() == null || article.getTitle().isEmpty() || article.getTitle().length() > 100 ||
+                article.getContent() == null || article.getContent().isEmpty() || article.getContent().length() > 16_777_215) {
             return false;
         }
         article.setCreatedAt(LocalDateTime.now());
