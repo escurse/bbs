@@ -52,7 +52,7 @@
         <a class="page first" th:if="${page.requestPage > page.movableMinPage}"
            th:href="@{'/board/list' (id=${board.getId()}, page=${page.movableMinPage}, filter=${filter}, keyword=${keyword})}">&lt;&lt;</a>
         <a class="page prev" th:if="${page.requestPage > page.movableMinPage}"
-           th:href="@{'/board/list' (id=${board.getId()}, page=${page.requestPage - 1}, filter=${filter}, keyword=${keyword})}">&lt;</a>
+           th:href="@{'/board/list' (id=${board.getId()}, page=${page.  requestPage - 1}, filter=${filter}, keyword=${keyword})}">&lt;</a>
         <div class="page-container">
             <a class="page"
                th:each="paging : ${#numbers.sequence(page.displayMinPage, page.displayMaxPage)}"
