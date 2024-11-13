@@ -81,4 +81,24 @@ ol, ul {
   background-color: rgb(234.7277486911, 37.0732984293, 33.2722513089);
 }
 
+.--board-nav {
+  background-color: #ffffff;
+  border: 0.0625rem solid #eeeeee;
+  padding: 1rem;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+.--board-nav ._link {
+  color: #212121;
+  text-decoration: none;
+}
+.--board-nav ._link:hover {
+  color: #387aeb;
+  text-decoration: underline;
+}
+
 /*# sourceMappingURL=common.css.map */

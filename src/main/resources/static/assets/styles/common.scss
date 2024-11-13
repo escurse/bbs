@@ -77,3 +77,26 @@ ol, ul {
     @include applyButtonColorScheme(#ef5350);
   }
 }
+
+.--board-nav {
+  background-color: #ffffff;
+  border: 0.0625rem solid #eeeeee;
+  padding: 1rem;
+
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-start;
+
+  ._link {
+    color: #212121;
+    text-decoration: none;
+
+    &:hover {
+      color: #387aeb;
+      text-decoration: underline;
+    }
+  }
+}

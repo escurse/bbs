@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="/board/assets/styles/list.css" type="text/css">
 </head>
 <body th:if="${board != null}">
+<nav class="--board-nav">
+    <a href="#" class="_link">공지사항</a>
+    <a href="#" class="_link">자유게시판</a>
+    <a href="#" class="_link">Q&A</a>
+</nav>
 <main id="main">
     <h1 class="title" th:text="${board.getText()}"></h1>
     <table class="article-table">
