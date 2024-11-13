@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<nav class="--board-nav">
+<nav class="--board-nav" th:fragment="boardNav">
     <a class="_link"
        th:each="name : ${boards}"
        th:text="${name.getText()}"

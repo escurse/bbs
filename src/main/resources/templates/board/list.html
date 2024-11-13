@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/board/assets/styles/list.css" type="text/css">
 </head>
 <body th:if="${board != null}">
+<th:block th:replace="~{fragments/common.html :: boardNav}"></th:block>
 <main id="main">
     <h1 class="title" th:text="${board.getText()}"></h1>
     <table class="article-table">
@@ -32,6 +33,9 @@
         </tr>
         </thead>
         <tbody>
+        <tr class="empty" th:if="${articles == null || articles.length == 0}">
+            <td colspan="5">표시할 내용이 없습니다.</td>
+        </tr>
         <tr th:each="article : ${articles}">
             <td th:text="${article.getIndex()}"></td>
             <td>
@@ -44,7 +48,7 @@
         </tr>
         </tbody>
     </table>
-    <div class="move">
+    <div class="move" th:if="${articles != null && articles.length > 0}">
         <a class="page first" th:if="${page.requestPage > page.movableMinPage}"
            th:href="@{'/board/list' (id=${board.getId()}, page=${page.movableMinPage}, filter=${filter}, keyword=${keyword})}">&lt;&lt;</a>
         <a class="page prev" th:if="${page.requestPage > page.movableMinPage}"

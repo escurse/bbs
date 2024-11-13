@@ -25,6 +25,7 @@
     <script defer src="/article/assets/scripts/write.js" type="text/javascript"></script>
 </head>
 <body th:if="${board != null}">
+<th:block th:replace="~{fragments/common.html :: boardNav}"></th:block>
 <form method="post" id="main">
     <h1 class="title" th:text="${'글 쓰기 - ' + board.getText()}"></h1>
     <div class="writer-container">

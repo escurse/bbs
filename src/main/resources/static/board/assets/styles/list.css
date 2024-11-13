@@ -49,6 +49,10 @@
 #main > .article-table > tbody > tr:not(:last-of-type) > td {
   border-bottom: 0.0625rem solid #f5f5f5;
 }
+#main > .article-table > tbody > tr.empty > td {
+  padding: 2rem;
+  text-align: center;
+}
 #main > .article-table > tbody > tr > td {
   background-color: #ffffff;
   padding: 0.5rem 0.75rem;

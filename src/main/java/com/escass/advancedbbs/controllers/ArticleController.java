@@ -27,9 +27,9 @@ public class ArticleController {
     private final ArticleService articleService;
     private final BoardSerivce boardSerivce;
 
-    @RequestMapping(value="/image", method = RequestMethod.GET)
+    @RequestMapping(value = "/image", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<byte[]> getImage(@RequestParam(value="index", required = false, defaultValue = "0") int index) {
+    public ResponseEntity<byte[]> getImage(@RequestParam(value = "index", required = false, defaultValue = "0") int index) {
         ImageEntity image = this.articleService.getImage(index);
         if (image == null) {
             return ResponseEntity.notFound().build();   // 응답 내용 없음, 상태 코드는 404(Not Found)인 상태로 응답을 내보냄.
@@ -43,7 +43,7 @@ public class ArticleController {
 
     @RequestMapping(value = "/image", method = RequestMethod.POST, produces = MediaType.TEXT_HTML_VALUE)
     @ResponseBody
-    public String postImage(@RequestParam (value="upload")MultipartFile file) throws IOException {
+    public String postImage(@RequestParam(value = "upload") MultipartFile file) throws IOException {
         ImageEntity image = new ImageEntity();
         image.setData(file.getBytes());
         image.setContentType(file.getContentType());
@@ -70,12 +70,15 @@ public class ArticleController {
             BoardEntity board = this.boardSerivce.getBoard(article.getBoardId());
             modelAndView.addObject("article", article);
             modelAndView.addObject("board", board);
+            if (board != null) {
+                modelAndView.addObject("boards", this.boardSerivce.getBoards());
+            }
         }
         modelAndView.setViewName("article/modify");
         return modelAndView;
     }
 
-    @RequestMapping(value="/modify", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/modify", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String patchModify(@RequestParam(value = "oldPassword", required = false) String oldPassword, ArticleEntity article) {
         boolean result = this.articleService.modifyArticle(article, oldPassword);
@@ -93,6 +96,7 @@ public class ArticleController {
             this.articleService.increaseArticleView(article);
             BoardEntity board = this.boardSerivce.getBoard(article.getBoardId());
             modelAndView.addObject("board", board);
+            modelAndView.addObject("boards", this.boardSerivce.getBoards());
         }
         modelAndView.setViewName("article/read");
         return modelAndView;
@@ -113,6 +117,9 @@ public class ArticleController {
         BoardEntity board = this.boardSerivce.getBoard(boardId);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("board", board);
+        if (board != null) {
+            modelAndView.addObject("boards", this.boardSerivce.getBoards());
+        }
         modelAndView.setViewName("article/write");
         return modelAndView;
     }

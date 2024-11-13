@@ -34,6 +34,7 @@
         <button class="--obj-button -blue" type="submit">확인</button>
     </div>
 </form>
+<th:block th:replace="~{fragments/common.html :: boardNav}"></th:block>
 <main id="main">
     <h1 class="title" th:text="${board.getText()}"></h1>
     <table class="table">

@@ -66,6 +66,11 @@
           border-bottom: 0.0625rem solid #f5f5f5;
         }
 
+        &.empty > td {
+          padding: 2rem;
+          text-align: center;
+        }
+
         > td {
           background-color: #ffffff;
           padding: 0.5rem 0.75rem;
