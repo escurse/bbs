@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<nav class="--board-nav">
+    <a class="_link"
+       th:each="name : ${boards}"
+       th:text="${name.getText()}"
+       th:href="@{'/board/list' (id=${name.getId()})}"></a>
+</nav>
+</html>

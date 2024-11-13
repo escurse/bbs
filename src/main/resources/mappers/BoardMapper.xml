@@ -11,4 +11,10 @@
         WHERE `id` = #{id}
         LIMIT 1
     </select>
+
+    <select id="selectBoards" resultType="com.escass.advancedbbs.entities.BoardEntity">
+        SELECT `id`   AS `id`,
+               `text` AS `text`
+        FROM `advanced_bbs`.`boards`
+    </select>
 </mapper>

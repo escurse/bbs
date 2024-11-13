@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,13 +26,8 @@ public class BoardController {
     public ModelAndView getList(@RequestParam(value = "id", required = false) String id,
                                 @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                 @RequestParam(value = "filter", required = false) String filter,
-                                @RequestParam(value = "keyword", required = false) String keyword) {
+                                @RequestParam(value = "keyword", required = false) String keyword, Model model) {
         BoardEntity board = this.boardSerivce.getBoard(id);
-//        if (board == null) {
-//            System.out.println("그런 게시판 없음");
-//        } else {
-//            System.out.println("그런 게시판 있음: " +board.getText());
-//        }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("board", board);
         if (board != null) {
@@ -46,6 +42,7 @@ public class BoardController {
                 modelAndView.addObject("filter", filter);
                 modelAndView.addObject("keyword", keyword);
             }
+            modelAndView.addObject("boards", this.boardSerivce.getBoards());
         }
         modelAndView.setViewName("board/list");
         return modelAndView;

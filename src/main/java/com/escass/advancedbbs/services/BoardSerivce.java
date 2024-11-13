@@ -20,4 +20,8 @@ public class BoardSerivce {
         }
         return this.boardMapper.selectBoardById(id);
     }
+
+    public BoardEntity[] getBoards() {
+        return this.boardMapper.selectBoards();
+    }
 }
