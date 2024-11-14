@@ -26,7 +26,7 @@ public class BoardController {
     public ModelAndView getList(@RequestParam(value = "id", required = false) String id,
                                 @RequestParam(value = "page", required = false, defaultValue = "1") int page,
                                 @RequestParam(value = "filter", required = false) String filter,
-                                @RequestParam(value = "keyword", required = false) String keyword, Model model) {
+                                @RequestParam(value = "keyword", required = false) String keyword) {
         BoardEntity board = this.boardSerivce.getBoard(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("board", board);
